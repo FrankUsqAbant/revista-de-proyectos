@@ -9,7 +9,7 @@
 **Mis proyectos públicos de GitHub, en una revista digital: pasa las páginas, mira la captura de cada uno y entra a la demo o al código.**
 
 [![En línea](https://img.shields.io/badge/GitHub%20Pages-en%20línea-14b8a6?style=flat-square&logo=github&logoColor=white&labelColor=0f172a)](https://frankusqabant.github.io/revista-de-proyectos/)
-![Se actualiza solo](https://img.shields.io/badge/se%20actualiza-cada%20semana-2dd4bf?style=flat-square&labelColor=0f172a)
+![Se actualiza solo](https://img.shields.io/badge/se%20actualiza-cada%2030%20min-2dd4bf?style=flat-square&labelColor=0f172a)
 ![Sin frameworks](https://img.shields.io/badge/frameworks-ninguno-5eead4?style=flat-square&labelColor=0f172a)
 [![Licencia MIT](https://img.shields.io/badge/licencia-MIT-94a3b8?style=flat-square&labelColor=0f172a)](LICENSE)
 
@@ -26,9 +26,9 @@
 | 📖 **Formato revista** | Doble página: a la izquierda la captura del proyecto, a la derecha su ficha con el stack, las estrellas, la fecha y los enlaces a la demo y al código. |
 | 🍃 **Giro de página en 3D** | Las hojas se doblan con sombra y lomo central. |
 | 🧘 **Modo lectura** | Las barras se esconden y reaparecen al acercar el cursor a los bordes. |
-| 🌓 **Tema claro y oscuro** | Sigue el del sistema y el botón lo cambia, sin guardar nada en tu navegador. |
+| 🌓 **Contraste siempre** | Con fondo oscuro la revista es de papel claro, y con fondo claro la revista es oscura. Sigue el tema del sistema y el botón lo cambia, sin guardar nada en tu navegador. |
 | ⌨️ **Teclado** | Flechas, barra espaciadora, `Inicio` y `Fin`. |
-| 🔄 **Se actualiza solo** | Cada domingo una acción de GitHub lee mis repositorios públicos y refresca la revista. Los que ya no existen salen. |
+| 🔄 **Se actualiza solo** | Cada 30 minutos una acción de GitHub lee mis repositorios públicos: los nuevos entran, los cambiados se actualizan y los eliminados salen. |
 
 ## 🕹️ Controles
 
@@ -49,12 +49,12 @@ docs/                    el sitio (GitHub Pages sirve esta carpeta)
 ├─ fonts/                fuentes propias
 └─ preview.webp  og.jpg  imágenes para el README y para compartir
 scripts/sync-repos.mjs   sincronización con la API de GitHub
-.github/workflows/       ejecución semanal y manual
+.github/workflows/       ejecución cada 30 minutos y manual
 ```
 
 ## 🔄 Cómo se actualiza
 
-La acción **Sincronizar catálogo** corre cada domingo (00:00 UTC) y a mano desde la pestaña *Actions*. También se puede lanzar en local:
+La acción **Sincronizar catálogo** corre cada 30 minutos y a mano desde la pestaña *Actions*. Un repositorio nuevo, cambiado o eliminado se refleja en menos de una hora. También se puede lanzar en local:
 
 ```bash
 node scripts/sync-repos.mjs
@@ -63,7 +63,7 @@ node scripts/sync-repos.mjs
 1. Lista los repositorios públicos, sin forks ni el repositorio de perfil.
 2. Para cada uno busca la captura: `preview.webp`, `docs/preview.webp` o la primera imagen real del README. Las insignias no cuentan.
 3. Si una captura guardada ya no existe, busca otra. Si un repositorio desaparece, sale del catálogo.
-4. Guarda el resultado en `docs/data/proyectos.json`, y solo hace commit si algo cambió.
+4. Guarda el resultado en `docs/data/proyectos.json`, y solo hace commit si algo cambió. Si pasan 45 días sin cambios, hace un commit de «latido» para que GitHub no apague la tarea programada.
 
 ## 🔒 Privacidad y seguridad
 

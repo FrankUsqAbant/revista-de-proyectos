@@ -63,7 +63,7 @@ async function buscarCaptura(repo, rama) {
 const previo = (() => { try { return JSON.parse(readFileSync(RUTA, 'utf8')); } catch { return { imagenes: {} }; } })();
 
 console.log(`[Sync] Consultando repositorios públicos de @${USUARIO}...`);
-const repos = await pedir(`https://api.github.com/users/${USUARIO}/repos?per_page=100&sort=updated`, 'json');
+const repos = await pedir(`https://api.github.com/users/${USUARIO}/repos?per_page=100&sort=pushed`, 'json');
 if (!Array.isArray(repos) || repos.length === 0) throw new Error('La API no devolvió repositorios: se conserva el catálogo anterior.');
 
 const validos = repos.filter((r) => !r.fork && r.name !== USUARIO).slice(0, MAX);
@@ -95,7 +95,7 @@ for (const r of validos) {
     language: r.language || 'Code',
     stars: r.stargazers_count || 0,
     tags,
-    updatedAt: r.updated_at ? r.updated_at.split('T')[0] : '',
+    updatedAt: (r.pushed_at || r.updated_at) ? (r.pushed_at || r.updated_at).split('T')[0] : '',
     createdAt: r.created_at ? r.created_at.split('T')[0] : '',
   });
 }

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   OPENGRAVITY MAGAZINE — Engine v2
+   REVISTA DE PROYECTOS — Motor
    Open-spread magazine with real README screenshots
    ═══════════════════════════════════════════ */
 
@@ -16,6 +16,24 @@ function formatDate(d) {
   if (!d) return '';
   const date = new Date(d + 'T00:00:00');
   return date.toLocaleDateString('es-ES', { year: 'numeric', month: 'short' });
+}
+
+// Título legible de un proyecto: lo anterior a «—» en la descripción, o el nombre del repositorio
+function tituloDe(p) {
+  if (p.description && p.description.includes('—')) return p.description.split('—')[0].trim();
+  return p.name.replace(/[-_]/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+}
+
+// Título editorial: la última palabra en cursiva de color (si hay más de una)
+function tituloEditorial(t) {
+  const palabras = String(t).trim().split(/\s+/);
+  if (palabras.length < 2) return esc(t);
+  const ultima = palabras.pop();
+  return esc(palabras.join(' ')) + '<br><em>' + esc(ultima) + '</em>';
+}
+
+function esc(t) {
+  return String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 function getImageForProject(name) {
@@ -126,26 +144,29 @@ class Magazine {
     }
   }
 
-  getCoverFrontHTML() {
+  getCoverFrontHTML(esHoja = false) {
+    // Láminas: los primeros proyectos con captura (sin la propia revista)
+    const laminas = projects
+      .filter((p) => readmeImages[p.name] && p.liveUrl && p.name !== 'revista-de-proyectos' && !p.name.endsWith('.github.io'))
+      .slice(0, 4)
+      .map((p) => `<div class="cv-plate"><img src="${readmeImages[p.name]}" alt="" decoding="async"><span>${esc(tituloDe(p))}</span></div>`)
+      .join('');
+    // Lenguajes más usados
+    const conteo = {};
+    projects.forEach((p) => { if (p.language && p.language !== 'Code') conteo[p.language] = (conteo[p.language] || 0) + 1; });
+    const lenguajes = Object.entries(conteo).sort((a, b) => b[1] - a[1]).slice(0, 3).map((e) => e[0]);
+    const anio = new Date().getFullYear();
     return `
       <div class="page-inner">
-        <div class="cover__logo-wrap" aria-hidden="true">⬡</div>
-        <h1 class="cover__title">Opengravity</h1>
-        <p class="cover__subtitle">Catálogo de Proyectos</p>
-        <p class="cover__tagline">"Automatizaciones, IA y código que impulsan ideas"</p>
-        
-        <div class="cover__stats">
-          <span>📂 52 Proyectos</span>
-          <span>⭐ Código Abierto</span>
-          <span>⚡ Full-Stack & IA</span>
+        <div class="cv-meta"><span>Edición ${anio}</span><span>${projects.length} proyectos</span></div>
+        <div class="cv-rule"></div>
+        <h1 class="cover__title">Mis <em>proyectos</em></h1>
+        <p class="cover__subtitle">Diseño, web y automatización: lo que he construido, uno por página.</p>
+        <div class="cv-plates">${laminas}</div>
+        <div class="cv-pie">
+          <div class="cv-chips">${lenguajes.map((l) => `<span>${l}</span>`).join('')}</div>
+          <button class="cover__cta" ${esHoja ? 'aria-hidden="true" tabindex="-1"' : 'id="cta-open"'}>Abrir la revista <span aria-hidden="true">→</span></button>
         </div>
-
-        <button class="cover__cta" aria-hidden="true" tabindex="-1">
-          Abrir Revista
-          <span aria-hidden="true">→</span>
-        </button>
-
-        <div class="cover__footer">github.com/FrankUsqAbant</div>
       </div>
     `;
   }
@@ -179,7 +200,7 @@ class Magazine {
     flipper.className = 'mag-leaf-flipper flip-forward';
     flipper.innerHTML = `
       <div class="leaf-face leaf-front leaf-front--cover">
-        ${this.getCoverFrontHTML()}
+        ${this.getCoverFrontHTML(true)}
         <div class="leaf-shadow leaf-shadow-front"></div>
       </div>
       <div class="leaf-face leaf-back">
@@ -476,7 +497,7 @@ class Magazine {
       ? `<div class="spread__image-wrap">
            <img src="${imgUrl}" alt="" class="spread__image-bg" aria-hidden="true">
            <div class="spread__image-frame">
-             <img src="${imgUrl}" alt="Captura del proyecto ${p.name}" class="spread__image" loading="lazy" data-fallo-lang="${langClass}" data-fallo-icon="${icon}" data-fallo-name="${p.name}">
+             <div class="shot"><div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="${imgUrl}" alt="Captura del proyecto ${p.name}" class="spread__image" loading="lazy" data-fallo-lang="${langClass}" data-fallo-icon="${icon}" data-fallo-name="${p.name}"></div>
            </div>
            <div class="spread__image-overlay"></div>
          </div>`
@@ -484,7 +505,7 @@ class Magazine {
            <div class="ph-pattern" aria-hidden="true"></div>
            <span class="spread__placeholder-icon">${icon}</span>
            <span class="spread__placeholder-name">${p.name}</span>
-           <span class="spread__placeholder-sub">Arte de Proyecto · Opengravity</span>
+           <span class="spread__placeholder-sub">Proyecto</span>
          </div>`;
 
     return `
@@ -494,7 +515,7 @@ class Magazine {
       </div>
       ${leftContent}
       <div class="spread__left-footer">
-        <span class="spread__caption">Opengravity Archives · Showcase</span>
+        <span class="spread__caption">Revista de proyectos</span>
       </div>
     `;
   }
@@ -530,7 +551,7 @@ class Magazine {
           <span class="right-content__date">${formatDate(p.updatedAt)}</span>
         </div>
 
-        <h2 class="right-content__name">${displayTitle}</h2>
+        <h2 class="right-content__name">${tituloEditorial(displayTitle)}</h2>
 
         <div class="right-content__repo-badge">
           <svg class="repo-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
@@ -569,7 +590,7 @@ class Magazine {
       </div>
 
       <div class="right-content__footer">
-        <span class="mag-signature">Opengravity Archives · Technical Showcase</span>
+        <span class="mag-signature">Revista de proyectos</span>
         <span class="spread__page-num">FOLIO ${padNum} / ${totalPad}</span>
       </div>
     `;
@@ -673,13 +694,15 @@ let magazine;
 // Si una captura no carga, la página muestra una portada con el icono y el nombre del proyecto (sin manejadores en línea, por la política de contenido)
 document.addEventListener('error', (e) => {
   const img = e.target;
-  if (!(img instanceof HTMLImageElement) || !img.classList.contains('spread__image')) return;
+  if (!(img instanceof HTMLImageElement)) return;
+  if (img.closest('.cv-plate')) { img.closest('.cv-plate').remove(); return; }
+  if (!img.classList.contains('spread__image')) return;
   const marco = img.closest('.spread__image-wrap');
   if (!marco) return;
   const ph = document.createElement('div');
   ph.className = 'spread__placeholder ' + (img.dataset.falloLang || '');
   const crear = (clase, texto) => { const el = document.createElement('span'); el.className = clase; el.textContent = texto; return el; };
-  ph.append(crear('spread__placeholder-icon', img.dataset.falloIcon || '📦'), crear('spread__placeholder-name', img.dataset.falloName || ''), crear('spread__placeholder-sub', 'Arte de Proyecto · Opengravity'));
+  ph.append(crear('spread__placeholder-icon', img.dataset.falloIcon || '📦'), crear('spread__placeholder-name', img.dataset.falloName || ''), crear('spread__placeholder-sub', 'Proyecto'));
   marco.replaceWith(ph);
 }, true);
 
@@ -705,9 +728,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.appendChild(aviso);
     return;
   }
-  const total = document.getElementById('total-proyectos');
-  if (total) total.textContent = '📂 ' + projects.length + ' Proyectos';
+  document.getElementById('cover-front').innerHTML = Magazine.prototype.getCoverFrontHTML.call({}, false);
   magazine = new Magazine();
   document.getElementById('cta-open')?.addEventListener('click', () => magazine.openCover());
+  const escena = document.getElementById('magazine-scene');
+  if (escena && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('pointermove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      escena.style.setProperty('--inc-x', (x * 7).toFixed(2) + 'deg');
+      escena.style.setProperty('--inc-y', (-y * 5).toFixed(2) + 'deg');
+    }, { passive: true });
+  }
   document.getElementById('btn-inicio')?.addEventListener('click', () => magazine.goToProject(0));
 });

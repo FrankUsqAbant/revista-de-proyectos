@@ -2,11 +2,11 @@ name: Sincronizar catálogo
 
 on:
   schedule:
-    - cron: '0 0 * * 0'   # cada domingo a las 00:00 UTC
-  workflow_dispatch:       # y a mano desde la pestaña Actions
+    - cron: '*/30 * * * *'   # cada 30 minutos: repositorios nuevos, cambiados o eliminados
+  workflow_dispatch:          # y a mano desde la pestaña Actions
 
 permissions:
-  contents: write          # necesario para guardar docs/data/proyectos.json
+  contents: write            # necesario para guardar docs/data/proyectos.json
 
 concurrency:
   group: sync-catalogo
@@ -28,14 +28,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/sync-repos.mjs
 
-      - name: Guardar si hay novedades
+      - name: Guardar si hay novedades (y latido mensual)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/data
           if git diff --staged --quiet; then
             echo "El catálogo ya está al día."
+            # GitHub apaga las tareas programadas tras 60 días sin actividad: si el último commit tiene más de 45 días, se hace un latido
+            ultimo=$(git log -1 --format=%ct)
+            if [ $(( $(date +%s) - ultimo )) -gt 3888000 ]; then
+              git commit --allow-empty -m "chore(auto): latido para mantener activa la sincronización [skip ci]"
+              git push
+            fi
           else
-            git commit -m "chore(auto): sincronización semanal del catálogo [skip ci]"
+            git commit -m "chore(auto): sincronización del catálogo [skip ci]"
             git push
           fi
