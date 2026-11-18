@@ -193,9 +193,9 @@ class Magazine {
   // Suelta la hoja con un fundido corto: así los mínimos desajustes de la página de debajo no se notan como un salto
   soltarHoja(hoja) {
     if (this.reducedMotion()) { hoja.remove(); return; }
-    hoja.style.transition = 'opacity .32s ease';
+    hoja.style.transition = 'opacity .4s ease';
     hoja.style.opacity = '0';
-    setTimeout(() => hoja.remove(), 360);
+    setTimeout(() => hoja.remove(), 440);
   }
 
   closeToCover() {
@@ -370,11 +370,12 @@ class Magazine {
       });
     });
 
-    setTimeout(() => {
+    setTimeout(async () => {
       this.currentProject = toIdx;
       const baseLeft = this.spreadContainer.querySelector('.spread__left');
       if (baseLeft) {
         baseLeft.innerHTML = this.renderLeftPageInner(projects[toIdx], toIdx + 1);
+        await this.imagenesListas(baseLeft); // la hoja sigue encima hasta que la página de debajo está lista
       }
       this.soltarHoja(flipper);
       this.updateNav();
@@ -431,11 +432,12 @@ class Magazine {
       });
     });
 
-    setTimeout(() => {
+    setTimeout(async () => {
       this.currentProject = toIdx;
       const baseRight = this.spreadContainer.querySelector('.spread__right');
       if (baseRight) {
         baseRight.innerHTML = this.renderRightPageInner(projects[toIdx], toIdx + 1);
+        await this.imagenesListas(baseRight);
       }
       this.soltarHoja(flipper);
       this.updateNav();
