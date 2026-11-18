@@ -12,6 +12,10 @@
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
+const SITE = 'https://frankusqabant.github.io/revista-de-proyectos/';
+const AUTOR = 'Frank Abanto';
+const NOMBRE_SITIO = 'Revista de proyectos · Frank Abanto';
+
 const USUARIO = 'FrankUsqAbant';
 const MAX = 100;
 const RUTA = 'docs/data/proyectos.json';
@@ -66,7 +70,7 @@ console.log(`[Sync] Consultando repositorios públicos de @${USUARIO}...`);
 const repos = await pedir(`https://api.github.com/users/${USUARIO}/repos?per_page=100&sort=pushed`, 'json');
 if (!Array.isArray(repos) || repos.length === 0) throw new Error('La API no devolvió repositorios: se conserva el catálogo anterior.');
 
-const validos = repos.filter((r) => !r.fork && r.name !== USUARIO).slice(0, MAX);
+const validos = repos.filter((r) => !r.fork && r.name !== USUARIO && r.name !== 'revista-de-proyectos').slice(0, MAX);
 const imagenes = {};
 const proyectos = [];
 
@@ -98,6 +102,67 @@ for (const r of validos) {
     updatedAt: (r.pushed_at || r.updated_at) ? (r.pushed_at || r.updated_at).split('T')[0] : '',
     createdAt: r.created_at ? r.created_at.split('T')[0] : '',
   });
+}
+
+// ── Contenido que ven los buscadores y las redes sin ejecutar JavaScript ──
+const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const titulo = (p) => (p.description && p.description.includes('—') ? p.description.split('—')[0].trim() : p.name.replace(/[-_]/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase()));
+const descripcion = (p) => (p.description && p.description.includes('—') ? p.description.split('—').slice(1).join('—').trim() : p.description || '');
+
+function bloqueSeo(lista) {
+  const grafo = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebSite', '@id': SITE + '#sitio', url: SITE, name: NOMBRE_SITIO, inLanguage: 'es', description: 'Revista interactiva con los proyectos de diseño, web y automatización de ' + AUTOR + '.', author: { '@id': SITE + '#autor' } },
+      { '@type': 'Person', '@id': SITE + '#autor', name: AUTOR, url: 'https://github.com/' + USUARIO, sameAs: ['https://github.com/' + USUARIO], jobTitle: 'Desarrollador web y automatizaciones' },
+      {
+        '@type': 'CollectionPage', '@id': SITE + '#coleccion', url: SITE, name: 'Mis proyectos', isPartOf: { '@id': SITE + '#sitio' }, inLanguage: 'es',
+        mainEntity: {
+          '@type': 'ItemList', numberOfItems: lista.length,
+          itemListElement: lista.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: titulo(p), url: SITE + '#' + encodeURIComponent(p.name), description: descripcion(p) })),
+        },
+      },
+    ],
+  };
+  return '<script type="application/ld+json">' + JSON.stringify(grafo).replace(/</g, '\\u003c') + '</script>';
+}
+
+function bloqueSinJs(lista) {
+  const items = lista.map((p) => {
+    const enlaces = [p.liveUrl ? `<a href="${esc(p.liveUrl)}">Ver en vivo</a>` : '', `<a href="${esc(p.githubUrl)}">Código</a>`].filter(Boolean).join(' · ');
+    return `      <li><strong>${esc(titulo(p))}</strong>: ${esc(descripcion(p))} (${enlaces})</li>`;
+  }).join('\n');
+  return `<noscript>
+    <section style="max-width:42rem;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif;line-height:1.6">
+      <h1>Mis proyectos</h1>
+      <p>Esta revista necesita JavaScript para pasar las páginas. Estos son los proyectos:</p>
+      <ul>
+${items}
+      </ul>
+    </section>
+  </noscript>`;
+}
+
+function reemplazarEntreMarcas(texto, inicio, fin, nuevo) {
+  const a = texto.indexOf(inicio);
+  const b = texto.indexOf(fin);
+  if (a < 0 || b < a) return texto;
+  return texto.slice(0, a + inicio.length) + '\n  ' + nuevo + '\n  ' + texto.slice(b);
+}
+
+try {
+  const original = readFileSync('docs/index.html', 'utf8').split('\r\n').join('\n');
+  let nuevo = reemplazarEntreMarcas(original, '<!-- SEO:INICIO -->', '<!-- SEO:FIN -->', bloqueSeo(proyectos));
+  nuevo = reemplazarEntreMarcas(nuevo, '<!-- PROYECTOS:INICIO -->', '<!-- PROYECTOS:FIN -->', bloqueSinJs(proyectos));
+  if (nuevo !== original) { writeFileSync('docs/index.html', nuevo); console.log('[Sync] index.html: datos estructurados y lista sin JavaScript actualizados.'); }
+
+  const ultima = proyectos.map((p) => p.updatedAt).filter(Boolean).sort().pop() || new Date().toISOString().split('T')[0];
+  const mapa = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE}</loc>\n    <lastmod>${ultima}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`;
+  let mapaAnterior = '';
+  try { mapaAnterior = readFileSync('docs/sitemap.xml', 'utf8').split('\r\n').join('\n'); } catch { /* primera vez */ }
+  if (mapa !== mapaAnterior) { writeFileSync('docs/sitemap.xml', mapa); console.log('[Sync] sitemap.xml actualizado.'); }
+} catch (e) {
+  console.warn('[Sync] No se pudo actualizar index.html o sitemap.xml:', e.message);
 }
 
 mkdirSync('docs/data', { recursive: true });

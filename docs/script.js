@@ -609,6 +609,12 @@ class Magazine {
       label = `Pág. ${current} de ${projects.length}`;
     }
 
+    // La dirección refleja la página: se puede copiar y compartir un proyecto concreto (#nombre). No guarda nada.
+    try {
+      const destino = this.state === 'spread' && projects[this.currentProject] ? '#' + encodeURIComponent(projects[this.currentProject].name) : location.pathname + location.search;
+      if (location.hash !== (destino.startsWith('#') ? destino : '')) history.replaceState(null, '', destino);
+    } catch { /* sin historial: se ignora */ }
+
     this.counter.textContent = label;
     this.progressBar.style.width = `${(current / (total - 1)) * 100}%`;
 
@@ -729,8 +735,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   document.getElementById('cover-front').innerHTML = Magazine.prototype.getCoverFrontHTML.call({}, false);
+  const hashInicial = location.hash; // se lee antes de crear la revista, que reescribe la dirección
   magazine = new Magazine();
   document.getElementById('cta-open')?.addEventListener('click', () => magazine.openCover());
+
+  // Enlace directo a un proyecto: https://…/revista-de-proyectos/#nombre-del-repo
+  const abrirDesdeEnlace = (hash) => {
+    const nombre = decodeURIComponent((hash || '').slice(1));
+    const idx = nombre ? projects.findIndex((p) => p.name === nombre) : -1;
+    if (idx >= 0 && !(magazine.state === 'spread' && magazine.currentProject === idx)) magazine.goToProject(idx);
+  };
+  abrirDesdeEnlace(hashInicial);
+  window.addEventListener('hashchange', () => abrirDesdeEnlace(location.hash));
   const escena = document.getElementById('magazine-scene');
   if (escena && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.matchMedia('(pointer: fine)').matches) {
     document.addEventListener('pointermove', (e) => {

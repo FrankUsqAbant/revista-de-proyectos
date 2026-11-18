@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data
+          git add docs/data docs/index.html docs/sitemap.xml
           if git diff --staged --quiet; then
             echo "El catálogo ya está al día."
             # GitHub apaga las tareas programadas tras 60 días sin actividad: si el último commit tiene más de 45 días, se hace un latido

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://frankusqabant.github.io/revista-de-proyectos/sitemap.xml

@@ -47,10 +47,18 @@ docs/                    el sitio (GitHub Pages sirve esta carpeta)
 ├─ index.html  style.css  script.js
 ├─ data/proyectos.json   proyectos y capturas (lo escribe la sincronización)
 ├─ fonts/                fuentes propias
-└─ preview.webp  og.jpg  imágenes para el README y para compartir
+├─ og.jpg  preview.webp  imágenes para compartir y para el README
+├─ icon.svg  apple-touch-icon.png  manifest.webmanifest   iconos e instalación
+└─ robots.txt  sitemap.xml   para los buscadores
 scripts/sync-repos.mjs   sincronización con la API de GitHub
 .github/workflows/       ejecución cada 30 minutos y manual
 ```
+
+## 🔗 Compartir
+
+- **Enlace por proyecto:** `https://frankusqabant.github.io/revista-de-proyectos/#nombre-del-repo`. La dirección cambia sola al pasar las páginas, así que basta con copiarla.
+- **Tarjeta en redes:** al pegar el enlace en WhatsApp, LinkedIn, X, Facebook, Telegram o Discord sale una tarjeta con imagen (1200 × 630), título y descripción.
+- **Buscadores:** leen la lista de proyectos (datos estructurados `schema.org`, `sitemap.xml`, y una lista visible sin JavaScript). La sincronización la mantiene al día.
 
 ## 🔄 Cómo se actualiza
 
@@ -63,7 +71,8 @@ node scripts/sync-repos.mjs
 1. Lista los repositorios públicos, sin forks ni el repositorio de perfil.
 2. Para cada uno busca la captura: `preview.webp`, `docs/preview.webp` o la primera imagen real del README. Las insignias no cuentan.
 3. Si una captura guardada ya no existe, busca otra. Si un repositorio desaparece, sale del catálogo.
-4. Guarda el resultado en `docs/data/proyectos.json`, y solo hace commit si algo cambió. Si pasan 45 días sin cambios, hace un commit de «latido» para que GitHub no apague la tarea programada.
+4. Reescribe los datos estructurados y la lista sin JavaScript de `docs/index.html`, y el `sitemap.xml`.
+5. Guarda el resultado en `docs/data/proyectos.json`, y solo hace commit si algo cambió. Si pasan 45 días sin cambios, hace un commit de «latido» para que GitHub no apague la tarea programada.
 
 ## 🔒 Privacidad y seguridad
 

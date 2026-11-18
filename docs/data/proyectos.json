@@ -2,19 +2,6 @@
   "actualizado": "2026-11-18",
   "proyectos": [
     {
-      "name": "revista-de-proyectos",
-      "description": "Revista digital con mis proyectos públicos de GitHub: pasa las páginas, mira cada captura y entra a la demo o al código. Se actualiza sola cada 30 minutos.",
-      "githubUrl": "https://github.com/FrankUsqAbant/revista-de-proyectos",
-      "liveUrl": "https://frankusqabant.github.io/revista-de-proyectos/",
-      "language": "JavaScript",
-      "stars": 1,
-      "tags": [
-        "JavaScript"
-      ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2026-05-01"
-    },
-    {
       "name": "PokeAPI",
       "description": "Creamos una PokeAPI para practicar",
       "githubUrl": "https://github.com/FrankUsqAbant/PokeAPI",
@@ -291,7 +278,6 @@
     }
   ],
   "imagenes": {
-    "revista-de-proyectos": "https://raw.githubusercontent.com/FrankUsqAbant/revista-de-proyectos/main/docs/preview.webp",
     "PokeAPI": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
     "FrankUsqAbant.github.io": "https://raw.githubusercontent.com/FrankUsqAbant/FrankUsqAbant.github.io/main/assets/og.jpg",
     "concepto-un-dia": "https://raw.githubusercontent.com/FrankUsqAbant/concepto-un-dia/main/docs/preview.webp",
