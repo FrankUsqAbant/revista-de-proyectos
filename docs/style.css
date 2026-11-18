@@ -1697,3 +1697,54 @@ body::after {
 [data-theme="light"] .spread__image-bg { opacity: 0.8; filter: blur(36px) saturate(1.5) brightness(0.32); }
 
 .cover__cta { min-height: 44px; }
+
+
+/* ═══════ Guía de uso, color por proyecto y detalles editoriales ═══════ */
+.puntos {
+  position: fixed; left: 50%; bottom: 5px; transform: translateX(-50%);
+  display: flex; gap: 5px; z-index: 90; pointer-events: none;
+  max-width: 92vw; flex-wrap: nowrap;
+}
+.puntos i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.22; transition: opacity .3s, transform .3s; }
+.puntos i.on { opacity: 0.9; transform: scale(1.5); }
+[data-theme="dark"] .puntos { color: #E7E2D6; }
+[data-theme="light"] .puntos { color: #2A261E; }
+
+.pista {
+  position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 12px);
+  z-index: 95; margin: 0; padding: 9px 18px; border-radius: 999px;
+  font-size: 0.82rem; letter-spacing: 0.02em; white-space: nowrap; max-width: 92vw;
+  background: rgba(10, 14, 16, 0.82); color: #EDEAE0; border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  opacity: 0; pointer-events: none; transition: opacity .5s ease, transform .5s ease;
+}
+.pista.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* El tono del proyecto tiñe su ficha */
+.magazine-scene.is-spread .magazine {
+  --accent: hsl(var(--tono, 170) 64% 38%);
+  --accent-hover: hsl(var(--tono, 170) 64% 30%);
+  --accent-soft: hsl(var(--tono, 170) 64% 38% / 0.12);
+  --accent-glow: hsl(var(--tono, 170) 64% 38% / 0.30);
+}
+[data-theme="light"] .magazine-scene.is-spread .magazine {
+  --accent: hsl(var(--tono, 170) 78% 62%);
+  --accent-hover: hsl(var(--tono, 170) 78% 72%);
+  --accent-soft: hsl(var(--tono, 170) 78% 62% / 0.12);
+  --accent-glow: hsl(var(--tono, 170) 78% 62% / 0.28);
+}
+
+/* Descripción con más cuerpo y folio grande de fondo: la ficha ya no queda vacía */
+.right-content { position: relative; isolation: isolate; }
+.right-content__desc { font-size: clamp(1rem, 1.35vw, 1.28rem); line-height: 1.65; }
+.folio-grande {
+  position: absolute; right: 4%; bottom: 86px; z-index: -1; pointer-events: none;
+  font-family: 'Instrument Serif', serif; font-style: italic; line-height: 0.8;
+  font-size: clamp(7rem, 17vw, 15rem); color: var(--accent); opacity: 0.09;
+}
+@media (max-width: 640px) { .folio-grande { font-size: 8rem; bottom: 70px; } .pista { font-size: 0.75rem; bottom: 18px; } }
+
+/* Portada y contraportada */
+.cover__subtitle strong { color: var(--accent); font-weight: 600; }
+.backcover__text em { font-style: italic; color: var(--accent); }
+.backcover__gh { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; margin-bottom: 14px; }

@@ -10,7 +10,7 @@
  *
  * Uso: node scripts/sync-repos.mjs   (GITHUB_TOKEN opcional: sube el límite de la API)
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 
 const SITE = 'https://frankusqabant.github.io/revista-de-proyectos/';
 const AUTOR = 'Frank Abanto';
@@ -75,8 +75,10 @@ const imagenes = {};
 const proyectos = [];
 
 for (const r of validos) {
-  let img = previo.imagenes?.[r.name] || null;
-  if (img && (!esCaptura(img) || !(await existe(img)))) {
+  // Captura hecha a mano en docs/capturas/<repo>.webp (para repos que no tienen una)
+  const manual = existsSync(`docs/capturas/${r.name}.webp`) ? `${SITE}capturas/${r.name}.webp` : null;
+  let img = manual || previo.imagenes?.[r.name] || null;
+  if (!manual && img && (!esCaptura(img) || !(await existe(img)))) {
     console.log(`[Sync] La captura guardada de ${r.name} no sirve (no existe o es una insignia); se busca otra.`);
     img = null;
   }

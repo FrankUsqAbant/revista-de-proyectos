@@ -101,7 +101,7 @@ class Magazine {
         <div class="cv-meta"><span>Edición ${anio}</span><span>${projects.length} proyectos</span></div>
         <div class="cv-rule"></div>
         <h1 class="cover__title">Mis <em>proyectos</em></h1>
-        <p class="cover__subtitle">Diseño, web y automatización: lo que he construido, uno por página.</p>
+        <p class="cover__subtitle">Soy <strong>Frank Abanto</strong>. Diseño y programo webs y automatizaciones para negocios reales. Aquí está lo que he construido, uno por página.</p>
         <div class="cv-plates">${laminas}</div>
         <div class="cv-pie">
           <div class="cv-chips">${lenguajes.map((l) => `<span>${l}</span>`).join('')}</div>
@@ -483,6 +483,7 @@ class Magazine {
 
     return `
       <div class="right-content">
+        <span class="folio-grande" aria-hidden="true">${padNum}</span>
         <div class="right-content__header">
           <div class="right-content__kicker">
             <span class="kicker-dot" aria-hidden="true"></span>
@@ -536,7 +537,39 @@ class Magazine {
     `;
   }
 
+  // Cada proyecto tiene su propio tono (sale de su nombre, siempre el mismo)
+  pintarTono() {
+    const p = projects[this.currentProject];
+    if (this.state === 'spread' && p) {
+      let n = 0;
+      for (const c of p.name) n = (n * 31 + c.charCodeAt(0)) % 360;
+      this.scene.style.setProperty('--tono', n);
+    } else {
+      this.scene.style.removeProperty('--tono');
+    }
+  }
+
+  // Puntos de posición e indicación de uso (se apaga al pasar la primera página)
+  pintarGuia(current, total) {
+    const cont = document.getElementById('puntos');
+    if (cont) {
+      if (cont.childElementCount !== total) cont.innerHTML = '<i></i>'.repeat(total);
+      [...cont.children].forEach((d, i) => d.classList.toggle('on', i === current));
+    }
+    const pista = document.getElementById('pista');
+    if (!pista) return;
+    if (this._pistaInicio === undefined) {
+      this._pistaInicio = current;
+      pista.textContent = window.matchMedia('(pointer: coarse)').matches ? 'Desliza para pasar de página' : 'Usa ← → , la rueda o arrastra para pasar de página';
+      pista.classList.add('on');
+      setTimeout(() => pista.classList.remove('on'), 9000);
+    } else if (current !== this._pistaInicio) {
+      pista.classList.remove('on');
+    }
+  }
+
   updateNav() {
+    this.pintarTono();
     const total = projects.length + 2;
     let current, label;
 
@@ -556,6 +589,7 @@ class Magazine {
     } catch { /* sin historial: se ignora */ }
 
     this.counter.textContent = label;
+    this.pintarGuia(current, total);
 
     if (this.prevSide) this.prevSide.disabled = this.state === 'cover';
     if (this.nextSide) this.nextSide.disabled = this.state === 'backcover';
