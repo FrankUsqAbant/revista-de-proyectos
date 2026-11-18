@@ -1800,3 +1800,6 @@ body::after {
   .backcover__sub { margin-bottom: .9rem; font-size: .88rem; }
   .backcover__gh { margin-bottom: 8px; }
 }
+
+/* La hoja voladora lleva las láminas quietas, en la misma pose en la que empiezan a flotar al llegar */
+.mag-leaf-flipper .cv-plate { animation: none !important; }

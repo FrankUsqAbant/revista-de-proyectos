@@ -89,7 +89,7 @@ class Magazine {
     const laminas = projects
       .filter((p) => readmeImages[p.name] && p.liveUrl && p.name !== 'revista-de-proyectos' && !p.name.endsWith('.github.io'))
       .slice(0, 4)
-      .map((p) => `<div class="cv-plate"><img src="${readmeImages[p.name]}" alt="" decoding="async"><span>${esc(tituloDe(p))}</span></div>`)
+      .map((p) => `<div class="cv-plate"><img src="${readmeImages[p.name]}" alt=""><span>${esc(tituloDe(p))}</span></div>`)
       .join('');
     // Lenguajes más usados
     const conteo = {};
@@ -183,6 +183,12 @@ class Magazine {
     }, 480);
   }
 
+  // Espera (máx. 600 ms) a que las imágenes de un bloque estén decodificadas
+  imagenesListas(el) {
+    const esperas = [...el.querySelectorAll('img')].map((i) => (i.decode ? i.decode().catch(() => {}) : Promise.resolve()));
+    return Promise.race([Promise.all(esperas), new Promise((r) => setTimeout(r, 600))]);
+  }
+
   closeToCover() {
     if (this.isAnimating) return;
     this.isAnimating = true;
@@ -216,20 +222,24 @@ class Magazine {
 
     this.magazine.appendChild(flipper);
 
-    requestAnimationFrame(() => {
+    // Las capturas de la portada deben estar listas antes de girar y antes de soltar la hoja (sin saltos)
+    this.imagenesListas(flipper).then(() => {
       requestAnimationFrame(() => {
-        flipper.classList.add('is-flipping');
+        requestAnimationFrame(() => {
+          flipper.classList.add('is-flipping');
+        });
       });
     });
 
-    setTimeout(() => {
-      this.state = 'cover';
+    setTimeout(async () => {
       this.coverPage.classList.remove('flipped');
       this.coverPage.style.display = '';
+      await this.imagenesListas(this.coverPage);
+      this.state = 'cover';
       flipper.remove();
       this.updateNav();
       this.isAnimating = false;
-    }, 750);
+    }, 800);
   }
 
   // ── Navegación con pase de hoja 3D (Page Turn) ──
