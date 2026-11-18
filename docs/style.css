@@ -1803,3 +1803,10 @@ body::after {
 
 /* La hoja voladora lleva las láminas quietas, en la misma pose en la que empiezan a flotar al llegar */
 .mag-leaf-flipper .cv-plate { animation: none !important; }
+
+/* Giro entre la última ficha y la contraportada: la contraportada espera debajo de la hoja */
+.backcover-page.entrando { transition: none; background: none; }
+.backcover-page.entrando::after { display: none; }
+.backcover-page.entrando .backcover-quotes { visibility: hidden; }
+.backcover-page.entrando .backcover-inner { background: linear-gradient(180deg, var(--mag-paper-right) 0%, var(--mag-paper-left) 100%); }
+.leaf-face .backcover-quotes { width: 100%; height: 100%; }

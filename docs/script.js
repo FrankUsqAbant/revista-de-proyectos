@@ -5,6 +5,7 @@
 
 // Los datos (proyectos y capturas) viven en data/proyectos.json y los actualiza scripts/sync-repos.mjs cada semana.
 let readmeImages = {};
+let miniaturas = {};
 let projects = [];
 
 const langIcons = {
@@ -89,7 +90,7 @@ class Magazine {
     const laminas = projects
       .filter((p) => readmeImages[p.name] && p.liveUrl && p.name !== 'revista-de-proyectos' && !p.name.endsWith('.github.io'))
       .slice(0, 4)
-      .map((p) => `<div class="cv-plate"><img src="${readmeImages[p.name]}" alt=""><span>${esc(tituloDe(p))}</span></div>`)
+      .map((p) => `<div class="cv-plate"><img src="${(miniaturas[p.name] && miniaturas[p.name].url) || readmeImages[p.name]}" alt=""><span>${esc(tituloDe(p))}</span></div>`)
       .join('');
     // Lenguajes más usados
     const conteo = {};
@@ -257,12 +258,59 @@ class Magazine {
     if (this.isAnimating) return;
 
     if (this.state === 'backcover') {
-      this.state = 'spread';
-      this.currentProject = projects.length - 1;
-      this.updateView();
+      this.flipFromBackcover();
     } else if (this.state === 'spread') {
       this.flipToPrev();
     }
+  }
+
+  // ── Última ficha → contraportada, con el mismo giro de hoja ──
+  flipToBackcover() {
+    const ultimo = projects.length - 1;
+    if (this.reducedMotion()) { this.state = 'backcover'; this.updateView(); return; }
+    this.isAnimating = true;
+    const flipper = document.createElement('div');
+    flipper.className = 'mag-leaf-flipper flip-forward';
+    flipper.innerHTML = `
+      <div class="leaf-face leaf-front">${this.renderRightPageHTML(projects[ultimo], ultimo + 1)}<div class="leaf-shadow leaf-shadow-front"></div></div>
+      <div class="leaf-face leaf-back"><div class="leaf-shadow leaf-shadow-back"></div></div>`;
+    flipper.querySelector('.leaf-back').prepend(this.backcoverPage.querySelector('.backcover-quotes').cloneNode(true));
+    this.backcoverPage.classList.add('active', 'entrando');
+    this.magazine.appendChild(flipper);
+    requestAnimationFrame(() => requestAnimationFrame(() => flipper.classList.add('is-flipping')));
+    setTimeout(() => {
+      this.state = 'backcover';
+      this.updateView();
+      this.backcoverPage.classList.remove('entrando');
+      flipper.remove();
+      this.isAnimating = false;
+    }, 780);
+  }
+
+  // ── Contraportada → última ficha ──
+  flipFromBackcover() {
+    const ultimo = projects.length - 1;
+    if (this.reducedMotion()) { this.state = 'spread'; this.currentProject = ultimo; this.updateView(); return; }
+    this.isAnimating = true;
+    this.renderSpreadDirect(ultimo);
+    this.spreadContainer.style.display = '';
+    const flipper = document.createElement('div');
+    flipper.className = 'mag-leaf-flipper flip-backward';
+    flipper.innerHTML = `
+      <div class="leaf-face leaf-front"><div class="leaf-shadow leaf-shadow-front"></div></div>
+      <div class="leaf-face leaf-back-reverse">${this.renderRightPageHTML(projects[ultimo], ultimo + 1)}<div class="leaf-shadow leaf-shadow-back"></div></div>`;
+    flipper.querySelector('.leaf-front').prepend(this.backcoverPage.querySelector('.backcover-quotes').cloneNode(true));
+    this.backcoverPage.classList.add('entrando');
+    this.magazine.appendChild(flipper);
+    requestAnimationFrame(() => requestAnimationFrame(() => flipper.classList.add('is-flipping')));
+    setTimeout(() => {
+      this.state = 'spread';
+      this.currentProject = ultimo;
+      this.updateView();
+      this.backcoverPage.classList.remove('entrando');
+      flipper.remove();
+      this.isAnimating = false;
+    }, 780);
   }
 
   // ── Efecto de pasar hoja hacia adelante (Derecha a Izquierda) ──
@@ -272,8 +320,7 @@ class Magazine {
     const toIdx = fromIdx + 1;
 
     if (toIdx >= projects.length) {
-      this.state = 'backcover';
-      this.updateView();
+      this.flipToBackcover();
       return;
     }
 
@@ -759,6 +806,7 @@ async function cargarCatalogo() {
   const datos = await respuesta.json();
   projects = datos.proyectos || [];
   readmeImages = datos.imagenes || {};
+  miniaturas = datos.miniaturas || {};
   if (!projects.length) throw new Error('catálogo vacío');
 }
 
@@ -776,6 +824,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   document.getElementById('cover-front').innerHTML = Magazine.prototype.getCoverFrontHTML.call({}, false);
+  // Las imágenes de la portada se guardan en memoria para que nunca tarden al volver
+  window.__portadaImgs = [...document.querySelectorAll('#cover-front .cv-plate img')].map((i) => { const n = new Image(); n.src = i.src; return n; });
   const hashInicial = location.hash; // se lee antes de crear la revista, que reescribe la dirección
   magazine = new Magazine();
   document.getElementById('cta-open')?.addEventListener('click', () => magazine.openCover());

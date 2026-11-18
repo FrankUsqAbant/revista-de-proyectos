@@ -298,5 +298,39 @@
     "aurea-dental": "https://raw.githubusercontent.com/FrankUsqAbant/aurea-dental/main/imagenes/preview-aurea-dental.webp",
     "starter-project-eleventy": "https://raw.githubusercontent.com/FrankUsqAbant/starter-project-eleventy/main/code/img/preview.webp",
     "PlatosYa": "https://raw.githubusercontent.com/FrankUsqAbant/PlatosYa/main/frontend/public/images/Principal.webp"
+  },
+  "miniaturas": {
+    "PokeAPI": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
+      "url": "capturas/mini/PokeAPI.webp"
+    },
+    "concepto-un-dia": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/concepto-un-dia/main/docs/preview.webp",
+      "url": "capturas/mini/concepto-un-dia.webp"
+    },
+    "jireh-pasteleria": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/jireh-pasteleria/main/docs/preview.webp",
+      "url": "capturas/mini/jireh-pasteleria.webp"
+    },
+    "chavez-originals": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/chavez-originals/main/docs/preview.webp",
+      "url": "capturas/mini/chavez-originals.webp"
+    },
+    "hostal-aguilar": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/hostal-aguilar/main/docs/preview.webp",
+      "url": "capturas/mini/hostal-aguilar.webp"
+    },
+    "frank-abanto": {
+      "src": "https://frankusqabant.github.io/revista-de-proyectos/capturas/frank-abanto.webp",
+      "url": "capturas/mini/frank-abanto.webp"
+    },
+    "document-student": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/document-student/main/docs/preview.webp",
+      "url": "capturas/mini/document-student.webp"
+    },
+    "simple-yoga-elite": {
+      "src": "https://raw.githubusercontent.com/FrankUsqAbant/simple-yoga-elite/main/docs/preview.webp",
+      "url": "capturas/mini/simple-yoga-elite.webp"
+    }
   }
 }

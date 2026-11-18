@@ -168,7 +168,7 @@ try {
 }
 
 mkdirSync('docs/data', { recursive: true });
-const salida = JSON.stringify({ actualizado: new Date().toISOString().split('T')[0], proyectos, imagenes }, null, 2) + '\n';
+const salida = JSON.stringify({ actualizado: new Date().toISOString().split('T')[0], proyectos, imagenes, miniaturas: previo.miniaturas || {} }, null, 2) + '\n';
 // Solo reescribe si cambió algo además de la fecha (así el historial no se llena de commits vacíos)
 const sinFecha = (s) => s.replace(/"actualizado": "[^"]*"/, '');
 let anterior = '';
