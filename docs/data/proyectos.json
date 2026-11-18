@@ -93,7 +93,7 @@
     },
     {
       "name": "frank-abanto",
-      "description": "Portafolio de Frank Abanto: Software e IA hechos a tu medida (sitio estático)",
+      "description": "Frank Abanto — portafolio de un solo archivo: titular bordado con canvas y WebGL, y proyectos leídos de GitHub",
       "githubUrl": "https://github.com/FrankUsqAbant/frank-abanto",
       "liveUrl": "https://frank-abanto.pages.dev",
       "language": "HTML",
@@ -148,7 +148,7 @@
     },
     {
       "name": "abanto.dev",
-      "description": "Portafolio de Frank Abanto: Software e IA hechos a tu medida.",
+      "description": "Abanto.dev — sitio completo en React + TypeScript: servicios con demos, proyectos, sección «Aprende», agenda y paleta de comandos",
       "githubUrl": "https://github.com/FrankUsqAbant/abanto.dev",
       "liveUrl": "https://abanto.pages.dev",
       "language": "TypeScript",
