@@ -91,24 +91,11 @@
     <div class="loader__spinner"></div>
   </div>
 
-  <!-- Top Bar -->
-  <header class="top-bar" role="banner">
-    <a href="#" class="top-bar__brand" id="brand-link" aria-label="Revista de proyectos - Inicio">
-      <span class="top-bar__logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.6 4 5v12c3-.4 6 0 8 1.5 2-1.5 5-1.9 8-1.5V5c-3-.4-6 0-8 1.5Z"/><path d="M12 6.5v12"/></svg></span>
-      <span>Revista de proyectos</span>
-    </a>
-    <div class="top-bar__actions">
-      <button
-        class="theme-toggle"
-        id="theme-toggle"
-        aria-label="Cambiar tema claro/oscuro"
-        title="Cambiar tema"
-      >
-        <span class="icon-moon" aria-hidden="true">🌙</span>
-        <span class="icon-sun" aria-hidden="true">☀️</span>
-      </button>
-    </div>
-  </header>
+  <!-- Único control fijo: tema claro/oscuro -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+    <span class="icon-moon" aria-hidden="true">🌙</span>
+    <span class="icon-sun" aria-hidden="true">☀️</span>
+  </button>
 
   <!-- Side Navigation -->
   <nav class="side-nav side-nav--prev" aria-label="Página anterior">
@@ -162,21 +149,8 @@
     </div>
   </main>
 
-  <!-- Bottom Navigation Bar -->
-  <nav class="nav-controls" role="navigation" aria-label="Navegación de la revista">
-    <button class="nav-btn" id="btn-prev" aria-label="Página anterior" title="Página anterior (←)">
-      ‹
-    </button>
-    <div class="nav-info">
-      <span class="nav-counter" id="nav-counter" aria-live="polite">Portada</span>
-      <div class="nav-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <div class="nav-progress__bar" id="progress-bar"></div>
-      </div>
-    </div>
-    <button class="nav-btn" id="btn-next" aria-label="Página siguiente" title="Página siguiente (→)">
-      ›
-    </button>
-  </nav>
+  <!-- Página actual (solo para lectores de pantalla) -->
+  <p class="sr-only" id="nav-counter" aria-live="polite">Portada</p>
 
   <!-- Scripts -->
   <script src="script.js"></script>

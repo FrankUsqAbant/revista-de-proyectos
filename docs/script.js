@@ -56,12 +56,9 @@ class Magazine {
     this.coverPage = document.getElementById('cover-page');
     this.spreadContainer = document.getElementById('spread-container');
     this.backcoverPage = document.getElementById('backcover-page');
-    this.prevBtn = document.getElementById('btn-prev');
-    this.nextBtn = document.getElementById('btn-next');
     this.prevSide = document.getElementById('side-prev');
     this.nextSide = document.getElementById('side-next');
     this.counter = document.getElementById('nav-counter');
-    this.progressBar = document.getElementById('progress-bar');
 
     this.init();
   }
@@ -74,64 +71,7 @@ class Magazine {
     }
     this.updateView();
     this.bindEvents();
-    this.setupZenUI();
     this.hideLoader();
-  }
-
-  setupZenUI() {
-    const topBar = document.querySelector('.top-bar');
-    const bottomBar = document.querySelector('.nav-controls');
-    if (!topBar || !bottomBar) return;
-
-    let hideTimer = null;
-
-    const showUI = () => {
-      topBar.classList.add('is-visible');
-      bottomBar.classList.add('is-visible');
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => {
-        if (!topBar.matches(':hover') && !bottomBar.matches(':hover')) {
-          topBar.classList.remove('is-visible');
-          bottomBar.classList.remove('is-visible');
-        }
-      }, 2600);
-    };
-
-    window.addEventListener('mousemove', (e) => {
-      const topTrigger = e.clientY < 75;
-      const bottomTrigger = e.clientY > window.innerHeight - 85;
-
-      if (topTrigger || bottomTrigger) {
-        showUI();
-      }
-    });
-
-    topBar.addEventListener('mouseenter', () => {
-      clearTimeout(hideTimer);
-      topBar.classList.add('is-visible');
-    });
-
-    bottomBar.addEventListener('mouseenter', () => {
-      clearTimeout(hideTimer);
-      bottomBar.classList.add('is-visible');
-    });
-
-    topBar.addEventListener('mouseleave', () => {
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => {
-        topBar.classList.remove('is-visible');
-      }, 800);
-    });
-
-    bottomBar.addEventListener('mouseleave', () => {
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => {
-        bottomBar.classList.remove('is-visible');
-      }, 800);
-    });
-
-    // Mostrar brevemente al inicio para orientar al usuario y luego replegarse
-    showUI();
   }
 
   hideLoader() {
@@ -616,10 +556,7 @@ class Magazine {
     } catch { /* sin historial: se ignora */ }
 
     this.counter.textContent = label;
-    this.progressBar.style.width = `${(current / (total - 1)) * 100}%`;
 
-    this.prevBtn.disabled = this.state === 'cover';
-    this.nextBtn.disabled = this.state === 'backcover';
     if (this.prevSide) this.prevSide.disabled = this.state === 'cover';
     if (this.nextSide) this.nextSide.disabled = this.state === 'backcover';
   }
@@ -629,8 +566,6 @@ class Magazine {
   }
 
   bindEvents() {
-    this.prevBtn.addEventListener('click', () => this.prev());
-    this.nextBtn.addEventListener('click', () => this.next());
     if (this.prevSide) this.prevSide.addEventListener('click', () => this.prev());
     if (this.nextSide) this.nextSide.addEventListener('click', () => this.next());
 
@@ -655,6 +590,32 @@ class Magazine {
         this.coverPage.classList.add('flipped');
         this.updateView();
       }
+    });
+
+    // Rueda del ratón: pasa de página (sin romper el desplazamiento interno de una ficha larga)
+    let bloqueoRueda = 0;
+    this.scene.addEventListener('wheel', (e) => {
+      const caja = e.target.closest('.right-content');
+      if (caja && caja.scrollHeight > caja.clientHeight + 2) return;
+      if (Math.abs(e.deltaY) < 12 && Math.abs(e.deltaX) < 12) return;
+      e.preventDefault();
+      const ahora = Date.now();
+      if (ahora - bloqueoRueda < 800) return;
+      bloqueoRueda = ahora;
+      if ((Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) > 0) this.next(); else this.prev();
+    }, { passive: false });
+
+    // Arrastrar con el ratón (el tacto se resuelve abajo con touchstart/touchend)
+    let arrastre = null;
+    this.scene.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('a, button')) return;
+      arrastre = { x: e.clientX, y: e.clientY };
+    });
+    window.addEventListener('pointerup', (e) => {
+      if (!arrastre) return;
+      const dx = e.clientX - arrastre.x, dy = e.clientY - arrastre.y;
+      arrastre = null;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) { if (dx < 0) this.next(); else this.prev(); }
     });
 
     const touchTarget = this.scene;
