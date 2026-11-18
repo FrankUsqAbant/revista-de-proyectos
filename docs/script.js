@@ -166,6 +166,23 @@ class Magazine {
     }, 750);
   }
 
+  // Desde cualquier ficha: funde a la primera y cierra la revista con el giro de la tapa
+  volverAPortada() {
+    if (this.isAnimating || this.state !== 'spread') return;
+    if (this.currentProject === 0) { this.closeToCover(); return; }
+    this.isAnimating = true;
+    const base = this.spreadContainer;
+    base.style.opacity = '0';
+    setTimeout(() => {
+      this.currentProject = 0;
+      this.renderSpreadDirect(0);
+      base.style.opacity = '';
+      this.isAnimating = false;
+      this.updateNav();
+      setTimeout(() => this.closeToCover(), 380);
+    }, 480);
+  }
+
   closeToCover() {
     if (this.isAnimating) return;
     this.isAnimating = true;
@@ -192,7 +209,7 @@ class Magazine {
         <div class="leaf-shadow leaf-shadow-front"></div>
       </div>
       <div class="leaf-face leaf-back-reverse leaf-back--cover">
-        ${this.getCoverFrontHTML()}
+        ${this.getCoverFrontHTML(true)}
         <div class="leaf-shadow leaf-shadow-back"></div>
       </div>
     `;
@@ -458,7 +475,7 @@ class Magazine {
       </div>
       ${leftContent}
       <div class="spread__left-footer">
-        <span class="spread__caption">Revista de proyectos</span>
+        <button type="button" class="spread__caption volver-portada" aria-label="Volver a la portada">Revista de proyectos</button>
       </div>
     `;
   }
@@ -534,7 +551,7 @@ class Magazine {
       </div>
 
       <div class="right-content__footer">
-        <span class="mag-signature">Revista de proyectos</span>
+        <button type="button" class="mag-signature volver-portada" aria-label="Volver a la portada">Revista de proyectos</button>
         <span class="spread__page-num">FOLIO ${padNum} / ${totalPad}</span>
       </div>
     `;
@@ -628,6 +645,8 @@ class Magazine {
         this.updateView();
       }
     });
+
+    this.scene.addEventListener('click', (e) => { if (e.target.closest('.volver-portada')) this.volverAPortada(); });
 
     // Rueda del ratón: pasa de página (sin romper el desplazamiento interno de una ficha larga)
     let bloqueoRueda = 0;
