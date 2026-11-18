@@ -3,7 +3,7 @@
   "proyectos": [
     {
       "name": "revista-de-proyectos",
-      "description": "Revista digital con mis proyectos públicos de GitHub: pasa las páginas, mira cada captura y entra a la demo o al código. Se actualiza sola cada semana.",
+      "description": "Revista digital con mis proyectos públicos de GitHub: pasa las páginas, mira cada captura y entra a la demo o al código. Se actualiza sola cada 30 minutos.",
       "githubUrl": "https://github.com/FrankUsqAbant/revista-de-proyectos",
       "liveUrl": "https://frankusqabant.github.io/revista-de-proyectos/",
       "language": "JavaScript",
@@ -13,6 +13,19 @@
       ],
       "updatedAt": "2026-11-18",
       "createdAt": "2026-05-01"
+    },
+    {
+      "name": "PokeAPI",
+      "description": "Creamos una PokeAPI para practicar",
+      "githubUrl": "https://github.com/FrankUsqAbant/PokeAPI",
+      "liveUrl": "https://frankusqabant.github.io/PokeAPI/",
+      "language": "CSS",
+      "stars": 0,
+      "tags": [
+        "CSS"
+      ],
+      "updatedAt": "2026-11-18",
+      "createdAt": "2025-03-22"
     },
     {
       "name": "FrankUsqAbant.github.io",
@@ -41,10 +54,10 @@
       "createdAt": "2026-11-15"
     },
     {
-      "name": "hostal-aguilar",
-      "description": "Hostal Aguilar (Cajamarca): web con concepto 'la luz encendida', reservas por WhatsApp y panel con Supabase",
-      "githubUrl": "https://github.com/FrankUsqAbant/hostal-aguilar",
-      "liveUrl": "https://hostal-aguilar.pages.dev",
+      "name": "jireh-pasteleria",
+      "description": "JIRÉH Panadería y Pastelería (Cajamarca): catálogo de tortas, 'Arma tu torta' en vivo y pedidos por WhatsApp",
+      "githubUrl": "https://github.com/FrankUsqAbant/jireh-pasteleria",
+      "liveUrl": "https://jireh-pasteleria.pages.dev",
       "language": "TypeScript",
       "stars": 1,
       "tags": [
@@ -54,8 +67,8 @@
         "React",
         "Supabase"
       ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2026-11-08"
+      "updatedAt": "2026-11-17",
+      "createdAt": "2026-11-07"
     },
     {
       "name": "chavez-originals",
@@ -71,14 +84,14 @@
         "React",
         "Supabase"
       ],
-      "updatedAt": "2026-11-18",
+      "updatedAt": "2026-11-17",
       "createdAt": "2026-11-06"
     },
     {
-      "name": "jireh-pasteleria",
-      "description": "JIRÉH Panadería y Pastelería (Cajamarca): catálogo de tortas, 'Arma tu torta' en vivo y pedidos por WhatsApp",
-      "githubUrl": "https://github.com/FrankUsqAbant/jireh-pasteleria",
-      "liveUrl": "https://jireh-pasteleria.pages.dev",
+      "name": "hostal-aguilar",
+      "description": "Hostal Aguilar (Cajamarca): web con concepto 'la luz encendida', reservas por WhatsApp y panel con Supabase",
+      "githubUrl": "https://github.com/FrankUsqAbant/hostal-aguilar",
+      "liveUrl": "https://hostal-aguilar.pages.dev",
       "language": "TypeScript",
       "stars": 1,
       "tags": [
@@ -88,47 +101,50 @@
         "React",
         "Supabase"
       ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2026-11-07"
+      "updatedAt": "2026-11-17",
+      "createdAt": "2026-11-08"
     },
     {
-      "name": "astro-sitio-web",
-      "description": "Un sitio web que esta hecho con astro",
-      "githubUrl": "https://github.com/FrankUsqAbant/astro-sitio-web",
-      "liveUrl": "https://frankusqabant.github.io/astro-sitio-web/",
-      "language": "Astro",
-      "stars": 1,
-      "tags": [
-        "Astro"
-      ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2025-11-22"
-    },
-    {
-      "name": "aurea-dental",
-      "description": "🦷 Clínica dental premium — sitio web profesional. Diseño elegante, responsive, sin dependencias.",
-      "githubUrl": "https://github.com/FrankUsqAbant/aurea-dental",
-      "liveUrl": "https://frankusqabant.github.io/aurea-dental/",
+      "name": "frank-abanto",
+      "description": "Portafolio de Frank Abanto: Software e IA hechos a tu medida (sitio estático)",
+      "githubUrl": "https://github.com/FrankUsqAbant/frank-abanto",
+      "liveUrl": "https://frank-abanto.pages.dev",
       "language": "HTML",
-      "stars": 1,
+      "stars": 0,
       "tags": [
         "HTML"
       ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2026-07-22"
+      "updatedAt": "2026-11-17",
+      "createdAt": "2026-11-15"
     },
     {
-      "name": "vertice-moda",
-      "description": "⚡ VÉRTICE — Moda masculina contemporánea. Sitio web premium dark-theme con acentos cobre. HTML/CSS vanilla, zero dependencias.",
-      "githubUrl": "https://github.com/FrankUsqAbant/vertice-moda",
-      "liveUrl": "https://frankusqabant.github.io/vertice-moda/",
-      "language": "HTML",
+      "name": "document-student",
+      "description": "document-student: proyecto de código abierto.",
+      "githubUrl": "https://github.com/FrankUsqAbant/document-student",
+      "liveUrl": "https://frankusqabant.github.io/document-student/",
+      "language": "TypeScript",
       "stars": 1,
       "tags": [
-        "HTML"
+        "TypeScript"
       ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2026-07-30"
+      "updatedAt": "2026-11-17",
+      "createdAt": "2026-03-02"
+    },
+    {
+      "name": "simple-yoga-elite",
+      "description": "Santuario de Yoga Elite - Protocolo Aurora v15.0. Experiencia wellness de grado boutique purificada y lista para despliegue.",
+      "githubUrl": "https://github.com/FrankUsqAbant/simple-yoga-elite",
+      "liveUrl": "https://frankusqabant.github.io/simple-yoga-elite/",
+      "language": "JavaScript",
+      "stars": 1,
+      "tags": [
+        "Aurora-protocol",
+        "Luxury-ui",
+        "React",
+        "Yoga-elite"
+      ],
+      "updatedAt": "2026-11-17",
+      "createdAt": "2026-03-13"
     },
     {
       "name": "pagina-taller-maquetacion",
@@ -144,17 +160,17 @@
       "createdAt": "2022-04-18"
     },
     {
-      "name": "frank-abanto",
-      "description": "Portafolio de Frank Abanto: Software e IA hechos a tu medida (sitio estático)",
-      "githubUrl": "https://github.com/FrankUsqAbant/frank-abanto",
-      "liveUrl": "https://frank-abanto.pages.dev",
-      "language": "HTML",
+      "name": "abanto.dev",
+      "description": "Portafolio de Frank Abanto: Software e IA hechos a tu medida.",
+      "githubUrl": "https://github.com/FrankUsqAbant/abanto.dev",
+      "liveUrl": "https://abanto.pages.dev",
+      "language": "TypeScript",
       "stars": 0,
       "tags": [
-        "HTML"
+        "Portfolio"
       ],
-      "updatedAt": "2026-11-15",
-      "createdAt": "2026-11-15"
+      "updatedAt": "2026-11-13",
+      "createdAt": "2026-11-12"
     },
     {
       "name": "kasa-nord",
@@ -166,7 +182,7 @@
       "tags": [
         "Portfolio"
       ],
-      "updatedAt": "2026-11-14",
+      "updatedAt": "2026-09-29",
       "createdAt": "2026-09-29"
     },
     {
@@ -179,21 +195,8 @@
       "tags": [
         "Portfolio"
       ],
-      "updatedAt": "2026-11-14",
+      "updatedAt": "2026-09-19",
       "createdAt": "2026-09-19"
-    },
-    {
-      "name": "abanto.dev",
-      "description": "Portafolio de Frank Abanto: Software e IA hechos a tu medida.",
-      "githubUrl": "https://github.com/FrankUsqAbant/abanto.dev",
-      "liveUrl": "https://abanto.pages.dev",
-      "language": "TypeScript",
-      "stars": 0,
-      "tags": [
-        "Portfolio"
-      ],
-      "updatedAt": "2026-11-14",
-      "createdAt": "2026-11-12"
     },
     {
       "name": "parallax",
@@ -209,6 +212,32 @@
       "createdAt": "2022-07-15"
     },
     {
+      "name": "astro-sitio-web",
+      "description": "Un sitio web que esta hecho con astro",
+      "githubUrl": "https://github.com/FrankUsqAbant/astro-sitio-web",
+      "liveUrl": "https://frankusqabant.github.io/astro-sitio-web/",
+      "language": "Astro",
+      "stars": 1,
+      "tags": [
+        "Astro"
+      ],
+      "updatedAt": "2026-08-29",
+      "createdAt": "2025-11-22"
+    },
+    {
+      "name": "vertice-moda",
+      "description": "⚡ VÉRTICE — Moda masculina contemporánea. Sitio web premium dark-theme con acentos cobre. HTML/CSS vanilla, zero dependencias.",
+      "githubUrl": "https://github.com/FrankUsqAbant/vertice-moda",
+      "liveUrl": "https://frankusqabant.github.io/vertice-moda/",
+      "language": "HTML",
+      "stars": 1,
+      "tags": [
+        "HTML"
+      ],
+      "updatedAt": "2026-08-29",
+      "createdAt": "2026-07-30"
+    },
+    {
       "name": "Proyecto-Library",
       "description": "Biblioteca Digital de libros clasicos de dominio publico",
       "githubUrl": "https://github.com/FrankUsqAbant/Proyecto-Library",
@@ -217,6 +246,19 @@
       "stars": 0,
       "tags": [
         "TypeScript"
+      ],
+      "updatedAt": "2026-08-29",
+      "createdAt": "2026-07-22"
+    },
+    {
+      "name": "aurea-dental",
+      "description": "🦷 Clínica dental premium — sitio web profesional. Diseño elegante, responsive, sin dependencias.",
+      "githubUrl": "https://github.com/FrankUsqAbant/aurea-dental",
+      "liveUrl": "https://frankusqabant.github.io/aurea-dental/",
+      "language": "HTML",
+      "stars": 1,
+      "tags": [
+        "HTML"
       ],
       "updatedAt": "2026-08-29",
       "createdAt": "2026-07-22"
@@ -235,19 +277,6 @@
       "createdAt": "2024-08-22"
     },
     {
-      "name": "PokeAPI",
-      "description": "Creamos una PokeAPI para practicar",
-      "githubUrl": "https://github.com/FrankUsqAbant/PokeAPI",
-      "liveUrl": "https://frankusqabant.github.io/PokeAPI/",
-      "language": "CSS",
-      "stars": 0,
-      "tags": [
-        "CSS"
-      ],
-      "updatedAt": "2026-08-29",
-      "createdAt": "2025-03-22"
-    },
-    {
       "name": "PlatosYa",
       "description": "PlatosYa: proyecto de código abierto.",
       "githubUrl": "https://github.com/FrankUsqAbant/PlatosYa",
@@ -259,57 +288,28 @@
       ],
       "updatedAt": "2026-08-29",
       "createdAt": "2026-06-18"
-    },
-    {
-      "name": "simple-yoga-elite",
-      "description": "Santuario de Yoga Elite - Protocolo Aurora v15.0. Experiencia wellness de grado boutique purificada y lista para despliegue.",
-      "githubUrl": "https://github.com/FrankUsqAbant/simple-yoga-elite",
-      "liveUrl": "https://frankusqabant.github.io/simple-yoga-elite/",
-      "language": "JavaScript",
-      "stars": 1,
-      "tags": [
-        "Aurora-protocol",
-        "Luxury-ui",
-        "React",
-        "Yoga-elite"
-      ],
-      "updatedAt": "2026-08-29",
-      "createdAt": "2026-03-13"
-    },
-    {
-      "name": "document-student",
-      "description": "document-student: proyecto de código abierto.",
-      "githubUrl": "https://github.com/FrankUsqAbant/document-student",
-      "liveUrl": "https://frankusqabant.github.io/document-student/",
-      "language": "TypeScript",
-      "stars": 1,
-      "tags": [
-        "TypeScript"
-      ],
-      "updatedAt": "2026-08-29",
-      "createdAt": "2026-03-02"
     }
   ],
   "imagenes": {
     "revista-de-proyectos": "https://raw.githubusercontent.com/FrankUsqAbant/revista-de-proyectos/main/docs/preview.webp",
+    "PokeAPI": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
     "FrankUsqAbant.github.io": "https://raw.githubusercontent.com/FrankUsqAbant/FrankUsqAbant.github.io/main/assets/og.jpg",
     "concepto-un-dia": "https://raw.githubusercontent.com/FrankUsqAbant/concepto-un-dia/main/docs/preview.webp",
-    "hostal-aguilar": "https://raw.githubusercontent.com/FrankUsqAbant/hostal-aguilar/main/docs/preview.webp",
-    "chavez-originals": "https://raw.githubusercontent.com/FrankUsqAbant/chavez-originals/main/docs/preview.webp",
     "jireh-pasteleria": "https://raw.githubusercontent.com/FrankUsqAbant/jireh-pasteleria/main/docs/preview.webp",
-    "astro-sitio-web": "https://raw.githubusercontent.com/FrankUsqAbant/astro-sitio-web/main/Readmee.png",
-    "aurea-dental": "https://raw.githubusercontent.com/FrankUsqAbant/aurea-dental/main/imagenes/preview-aurea-dental.webp",
-    "vertice-moda": "https://raw.githubusercontent.com/FrankUsqAbant/vertice-moda/main/imagenes/readme/preview-vertice.webp",
+    "chavez-originals": "https://raw.githubusercontent.com/FrankUsqAbant/chavez-originals/main/docs/preview.webp",
+    "hostal-aguilar": "https://raw.githubusercontent.com/FrankUsqAbant/hostal-aguilar/main/docs/preview.webp",
+    "document-student": "https://raw.githubusercontent.com/FrankUsqAbant/document-student/main/docs/preview.webp",
+    "simple-yoga-elite": "https://raw.githubusercontent.com/FrankUsqAbant/simple-yoga-elite/main/docs/preview.webp",
     "pagina-taller-maquetacion": "https://raw.githubusercontent.com/FrankUsqAbant/pagina-taller-maquetacion/gh-pages/docs/hero.png",
+    "abanto.dev": "https://raw.githubusercontent.com/FrankUsqAbant/abanto.dev/main/docs/preview.webp",
     "kasa-nord": "https://raw.githubusercontent.com/FrankUsqAbant/kasa-nord/main/docs/hero.webp",
     "extracto": "https://raw.githubusercontent.com/FrankUsqAbant/extracto/main/public/extracto-preview.png",
-    "abanto.dev": "https://raw.githubusercontent.com/FrankUsqAbant/abanto.dev/main/docs/preview.webp",
     "parallax": "https://raw.githubusercontent.com/FrankUsqAbant/parallax/master/img/preview.webp",
+    "astro-sitio-web": "https://raw.githubusercontent.com/FrankUsqAbant/astro-sitio-web/main/Readmee.png",
+    "vertice-moda": "https://raw.githubusercontent.com/FrankUsqAbant/vertice-moda/main/imagenes/readme/preview-vertice.webp",
     "Proyecto-Library": "https://raw.githubusercontent.com/FrankUsqAbant/Proyecto-Library/main/public/preview-zen-library.webp",
+    "aurea-dental": "https://raw.githubusercontent.com/FrankUsqAbant/aurea-dental/main/imagenes/preview-aurea-dental.webp",
     "starter-project-eleventy": "https://raw.githubusercontent.com/FrankUsqAbant/starter-project-eleventy/main/code/img/preview.webp",
-    "PokeAPI": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
-    "PlatosYa": "https://raw.githubusercontent.com/FrankUsqAbant/PlatosYa/main/frontend/public/images/Principal.webp",
-    "simple-yoga-elite": "https://raw.githubusercontent.com/FrankUsqAbant/simple-yoga-elite/main/docs/preview.webp",
-    "document-student": "https://raw.githubusercontent.com/FrankUsqAbant/document-student/main/docs/preview.webp"
+    "PlatosYa": "https://raw.githubusercontent.com/FrankUsqAbant/PlatosYa/main/frontend/public/images/Principal.webp"
   }
 }
