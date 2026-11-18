@@ -1,56 +1,77 @@
-# ⬡ Opengravity — Catálogo Revista de Proyectos
-
-[![GitHub Pages](https://img.shields.io/badge/Demo-GitHub%20Pages-2dd4bf?style=for-the-badge&logo=github)](https://frankusqabant.github.io/OpenGravity/)
-[![Licencia](https://img.shields.io/badge/Licencia-MIT-0d9488?style=for-the-badge)](LICENSE)
-[![Proyectos](https://img.shields.io/badge/Proyectos-52%20Repositorios-14b8a6?style=for-the-badge)](https://github.com/FrankUsqAbant)
-
-> **Catálogo interactivo en formato revista digital (*Open-Spread Flip-Book*) con física tridimensional, capturas reales de proyectos y experiencia de lectura inmersiva.**
-
----
-
 <div align="center">
-  <a href="https://frankusqabant.github.io/OpenGravity/" target="_blank" rel="noopener noreferrer" title="Haz clic para abrir el catálogo interactivo en vivo">
-    <img src="./docs/preview.webp" alt="Opengravity Flip-Book Magazine Preview" width="850" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); cursor: pointer;" />
-  </a>
-  <br>
-  <sub>👆 <i>Haz clic en la imagen para abrir la revista interactiva en vivo</i></sub>
+
+<a href="https://frankusqabant.github.io/revista-de-proyectos/">
+  <img src="docs/preview.webp" alt="Revista de proyectos: una página con la captura de un proyecto y, al lado, su ficha" width="760">
+</a>
+
+# Revista de proyectos
+
+**Mis proyectos públicos de GitHub, en una revista digital: pasa las páginas, mira la captura de cada uno y entra a la demo o al código.**
+
+[![En línea](https://img.shields.io/badge/GitHub%20Pages-en%20línea-14b8a6?style=flat-square&logo=github&logoColor=white&labelColor=0f172a)](https://frankusqabant.github.io/revista-de-proyectos/)
+![Se actualiza solo](https://img.shields.io/badge/se%20actualiza-cada%20semana-2dd4bf?style=flat-square&labelColor=0f172a)
+![Sin frameworks](https://img.shields.io/badge/frameworks-ninguno-5eead4?style=flat-square&labelColor=0f172a)
+[![Licencia MIT](https://img.shields.io/badge/licencia-MIT-94a3b8?style=flat-square&labelColor=0f172a)](LICENSE)
+
+### [Abrir la revista →](https://frankusqabant.github.io/revista-de-proyectos/)
+
 </div>
 
 ---
 
-## 🌟 Características Principales
+## ✨ Qué incluye
 
-- 📖 **Formato Revista Abierta (Doble Página):**
-  - **Página Izquierda:** Hero visual con capturas reales extraídas directamente de los `README.md` de cada repositorio.
-  - **Página Derecha:** Ficha técnica editorial (*Case Study*) con stack tecnológico, estadísticas de GitHub y accesos directos.
-- 🍃 **Física 3D Realista (*Leaf Flipper*):** Giro tridimensional fluido con sombras dinámicas de curvatura de papel y lomo central.
-- 🧘 **Modo Lectura Inmersivo (*Zen UI*):** Interfaz limpia sin barras de distracción que se revelan suavemente al acercar el cursor a los bordes superior e inferior.
-- 🌓 **Doble Tema (Light & Dark Mode):** Acabado de papel marfil satinado en modo claro y pizarra tecnológica en modo oscuro.
-- ⌨️ **Navegación Intuitiva:** Soporte para flechas del teclado (`←` / `→`), clics directos sobre las páginas y controles flotantes.
-- ⚡ **100% Estático y Ultrarrápido:** Construido con HTML5 semántico, Vanilla CSS3 y JavaScript moderno sin dependencias pesadas, optimizado para **GitHub Pages**.
+| | |
+|---|---|
+| 📖 **Formato revista** | Doble página: a la izquierda la captura del proyecto, a la derecha su ficha con el stack, las estrellas, la fecha y los enlaces a la demo y al código. |
+| 🍃 **Giro de página en 3D** | Las hojas se doblan con sombra y lomo central. |
+| 🧘 **Modo lectura** | Las barras se esconden y reaparecen al acercar el cursor a los bordes. |
+| 🌓 **Tema claro y oscuro** | Sigue el del sistema y el botón lo cambia, sin guardar nada en tu navegador. |
+| ⌨️ **Teclado** | Flechas, barra espaciadora, `Inicio` y `Fin`. |
+| 🔄 **Se actualiza solo** | Cada domingo una acción de GitHub lee mis repositorios públicos y refresca la revista. Los que ya no existen salen. |
 
----
-
-## 🕹️ Controles y Navegación
+## 🕹️ Controles
 
 | Acción | Control |
 | :--- | :--- |
-| **Siguiente Página** | Flecha derecha `→`, barra espaciadora o clic en `›` |
-| **Página Anterior** | Flecha izquierda `←` o clic en `‹` |
-| **Ir al Inicio / Portada** | Tecla `Home` |
-| **Ir a la Contraportada** | Tecla `End` |
-| **Mostrar Barras de Control** | Mover el ratón hacia el borde superior o inferior |
-| **Cambiar Tema (Luz / Oscuro)** | Botón de luna/sol en la barra superior |
+| Página siguiente | `→`, barra espaciadora o el botón `›` |
+| Página anterior | `←` o el botón `‹` |
+| Portada / contraportada | `Inicio` / `Fin` |
+| Mostrar las barras | Acercar el ratón al borde superior o inferior |
+| Cambiar de tema | Botón de luna o sol, arriba a la derecha |
 
----
+## 🧱 Estructura
 
-## 🚀 Despliegue en GitHub Pages
+```
+docs/                    el sitio (GitHub Pages sirve esta carpeta)
+├─ index.html  style.css  script.js
+├─ data/proyectos.json   proyectos y capturas (lo escribe la sincronización)
+├─ fonts/                fuentes propias
+└─ preview.webp  og.jpg  imágenes para el README y para compartir
+scripts/sync-repos.mjs   sincronización con la API de GitHub
+.github/workflows/       ejecución semanal y manual
+```
 
-El proyecto se despliega automáticamente en GitHub Pages desde la rama `main`:
-👉 **[https://frankusqabant.github.io/OpenGravity/](https://frankusqabant.github.io/OpenGravity/)**
+## 🔄 Cómo se actualiza
 
----
+La acción **Sincronizar catálogo** corre cada domingo (00:00 UTC) y a mano desde la pestaña *Actions*. También se puede lanzar en local:
 
-<div align="center">
-  <sub>Desarrollado con pasión para el ecosistema <b>Opengravity</b> · <a href="https://github.com/FrankUsqAbant">FrankUsqAbant</a></sub>
-</div>
+```bash
+node scripts/sync-repos.mjs
+```
+
+1. Lista los repositorios públicos, sin forks ni el repositorio de perfil.
+2. Para cada uno busca la captura: `preview.webp`, `docs/preview.webp` o la primera imagen real del README. Las insignias no cuentan.
+3. Si una captura guardada ya no existe, busca otra. Si un repositorio desaparece, sale del catálogo.
+4. Guarda el resultado en `docs/data/proyectos.json`, y solo hace commit si algo cambió.
+
+## 🔒 Privacidad y seguridad
+
+- **Sin rastros:** no guarda nada en el navegador.
+- **Política de contenido** en el HTML: solo se ejecuta el script propio, y las fuentes son propias.
+- **Imágenes:** las capturas se cargan desde GitHub (`raw.githubusercontent.com`); no hay más servicios de terceros.
+- **Escaneo de secretos** activado en el repositorio.
+
+## 📄 Licencia
+
+[MIT](LICENSE) · © 2026 Frank Abanto

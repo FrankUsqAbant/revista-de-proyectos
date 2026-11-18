@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Opengravity — Catálogo Revista de Proyectos</title>
   <meta name="description" content="Revista técnica interactiva de proyectos Opengravity. Automatizaciones, IA y desarrollo de vanguardia de FrankUsqAbant.">
   <meta name="author" content="FrankUsqAbant">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Opengravity — Catálogo Revista de Proyectos">
-  <meta property="og:description" content="Explora 52 proyectos técnicos en formato revista interactiva de dos páginas.">
+  <meta property="og:description" content="Explora los proyectos de FrankUsqAbant en formato revista interactiva de dos páginas.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://frankusqabant.github.io/">
+  <meta property="og:image" content="https://frankusqabant.github.io/revista-de-proyectos/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://frankusqabant.github.io/revista-de-proyectos/">
+  <link rel="canonical" href="https://frankusqabant.github.io/revista-de-proyectos/">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⬡</text></svg>">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fuentes propias -->
+  <link rel="preload" href="fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
@@ -76,12 +81,12 @@
             <p class="cover__tagline">"Automatizaciones, IA y código que impulsan ideas"</p>
             
             <div class="cover__stats">
-              <span>📂 59 Proyectos</span>
+              <span id="total-proyectos">📂 Proyectos</span>
               <span>⭐ Código Abierto</span>
               <span>⚡ Full-Stack & IA</span>
             </div>
 
-            <button class="cover__cta" id="cta-open" onclick="magazine.openCover()" aria-label="Abrir revista">
+            <button class="cover__cta" id="cta-open" aria-label="Abrir revista">
               Abrir Revista
               <span aria-hidden="true">→</span>
             </button>
@@ -111,7 +116,7 @@
               github.com/FrankUsqAbant
             </a>
           </p>
-          <button class="cover__cta" onclick="magazine.goToProject(0)" aria-label="Volver al inicio">
+          <button class="cover__cta" id="btn-inicio" aria-label="Volver al inicio">
             <span aria-hidden="true">←</span> Volver a la portada
           </button>
         </div>

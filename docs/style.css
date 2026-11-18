@@ -1,3 +1,8 @@
+/* Fuentes propias (licencia OFL): Instrument Serif e Inter. */
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-400.woff2) format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-400-italic.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-variable.woff2) format("woff2")}
+
 /* ═══════════════════════════════════════════════════════════
    OPENGRAVITY LUXURY MAGAZINE — Design System
    Realistic Open-Spread Editorial Experience
@@ -1525,3 +1530,10 @@ body::after {
 
   .btn { width: 100%; }
 }
+
+/* Objetivos táctiles de al menos 44 px */
+.top-bar__brand { min-height: 44px; display: inline-flex; align-items: center; }
+.theme-toggle { min-width: 44px; min-height: 44px; }
+.nav-btn, .side-nav__btn { min-width: 44px; min-height: 44px; }
+.btn { min-height: 44px; }
+.backcover__link { display: inline-flex; align-items: center; min-height: 44px; }

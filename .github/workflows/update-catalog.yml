@@ -1,39 +1,41 @@
-name: Sincronización Automática del Catálogo Opengravity
+name: Sincronizar catálogo
 
 on:
   schedule:
-    # Se ejecuta automáticamente todos los domingos a las 00:00 UTC (semanal)
-    - cron: '0 0 * * 0'
-  workflow_dispatch: # Permite ejecutar la sincronización manualmente en cualquier momento desde GitHub Actions
+    - cron: '0 0 * * 0'   # cada domingo a las 00:00 UTC
+  workflow_dispatch:       # y a mano desde la pestaña Actions
 
 permissions:
-  contents: write
+  contents: write          # necesario para guardar docs/data/proyectos.json
+
+concurrency:
+  group: sync-catalogo
+  cancel-in-progress: false
 
 jobs:
-  sync-and-deploy:
+  sincronizar:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Sincronizar nuevos repositorios (hasta 100)
+      - name: Sincronizar repositorios públicos
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/sync-repos.mjs
 
-      - name: Hacer commit y push si hay novedades
+      - name: Guardar si hay novedades
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data
           if git diff --staged --quiet; then
-            echo "El catálogo ya está al día. No hay nuevos repositorios."
+            echo "El catálogo ya está al día."
           else
-            git commit -m "chore(auto): sincronización semanal de repositorios de Opengravity [skip ci]"
-            git push origin main
+            git commit -m "chore(auto): sincronización semanal del catálogo [skip ci]"
+            git push
           fi
