@@ -1810,3 +1810,6 @@ body::after {
 .backcover-page.entrando .backcover-quotes { visibility: hidden; }
 .backcover-page.entrando .backcover-inner { background: linear-gradient(180deg, var(--mag-paper-right) 0%, var(--mag-paper-left) 100%); }
 .leaf-face .backcover-quotes { width: 100%; height: 100%; }
+
+/* Foco visible con teclado en las flechas laterales */
+.side-nav__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
