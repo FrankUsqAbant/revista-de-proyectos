@@ -173,19 +173,6 @@
       "createdAt": "2026-09-29"
     },
     {
-      "name": "extracto",
-      "description": "App de práctica: extrae y clasifica facturas, recibos y contratos con IA (Gemini) y exporta a Excel.",
-      "githubUrl": "https://github.com/FrankUsqAbant/extracto",
-      "liveUrl": "https://extracto-roan.vercel.app",
-      "language": "TypeScript",
-      "stars": 0,
-      "tags": [
-        "Portfolio"
-      ],
-      "updatedAt": "2026-09-19",
-      "createdAt": "2026-09-19"
-    },
-    {
       "name": "parallax",
       "description": "Parallax — sitio con efecto de profundidad al hacer scroll",
       "githubUrl": "https://github.com/FrankUsqAbant/parallax",
@@ -290,7 +277,6 @@
     "pagina-taller-maquetacion": "https://raw.githubusercontent.com/FrankUsqAbant/pagina-taller-maquetacion/gh-pages/docs/hero.png",
     "abanto.dev": "https://raw.githubusercontent.com/FrankUsqAbant/abanto.dev/main/docs/preview.webp",
     "kasa-nord": "https://raw.githubusercontent.com/FrankUsqAbant/kasa-nord/main/docs/hero.webp",
-    "extracto": "https://raw.githubusercontent.com/FrankUsqAbant/extracto/main/public/extracto-preview.png",
     "parallax": "https://raw.githubusercontent.com/FrankUsqAbant/parallax/master/img/preview.webp",
     "astro-sitio-web": "https://raw.githubusercontent.com/FrankUsqAbant/astro-sitio-web/main/Readmee.png",
     "vertice-moda": "https://raw.githubusercontent.com/FrankUsqAbant/vertice-moda/main/imagenes/readme/preview-vertice.webp",
