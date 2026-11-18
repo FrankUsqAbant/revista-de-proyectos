@@ -588,7 +588,21 @@ class Magazine {
     }
   }
 
+  // Frases de la contraportada: rotan solas mientras se ve esa página
+  rotarFrases() {
+    const frases = [...document.querySelectorAll('#bq-stage .bq')];
+    if (frases.length < 2) return;
+    clearInterval(this._frasesT);
+    if (this.state !== 'backcover' || this.reducedMotion()) return;
+    this._frasesT = setInterval(() => {
+      const i = frases.findIndex((f) => f.classList.contains('on'));
+      frases[i]?.classList.remove('on');
+      frases[(i + 1) % frases.length].classList.add('on');
+    }, 7000);
+  }
+
   updateNav() {
+    this.rotarFrases();
     this.pintarTono();
     const total = projects.length + 2;
     let current, label;
