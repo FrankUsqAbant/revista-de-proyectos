@@ -176,6 +176,7 @@ class Magazine {
 
     if (this.reducedMotion()) {
       this.state = 'cover';
+      this.coverPage.classList.remove('flipped');
       this.coverPage.style.display = '';
       this.updateNav();
       this.isAnimating = false;
@@ -206,6 +207,7 @@ class Magazine {
 
     setTimeout(() => {
       this.state = 'cover';
+      this.coverPage.classList.remove('flipped');
       this.coverPage.style.display = '';
       flipper.remove();
       this.updateNav();
@@ -374,6 +376,7 @@ class Magazine {
   updateView() {
     if (this.state === 'cover') {
       this.scene.className = 'magazine-scene is-cover';
+      this.coverPage.classList.remove('flipped');
       this.coverPage.style.display = '';
       this.coverPage.classList.remove('flipped');
       this.spreadContainer.style.display = '';
