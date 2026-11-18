@@ -161,7 +161,7 @@ class Magazine {
     setTimeout(() => {
       this.state = 'spread';
       this.currentProject = 0;
-      flipper.remove();
+      this.soltarHoja(flipper);
       this.updateNav();
       this.isAnimating = false;
     }, 750);
@@ -188,6 +188,14 @@ class Magazine {
   imagenesListas(el) {
     const esperas = [...el.querySelectorAll('img')].map((i) => (i.decode ? i.decode().catch(() => {}) : Promise.resolve()));
     return Promise.race([Promise.all(esperas), new Promise((r) => setTimeout(r, 600))]);
+  }
+
+  // Suelta la hoja con un fundido corto: así los mínimos desajustes de la página de debajo no se notan como un salto
+  soltarHoja(hoja) {
+    if (this.reducedMotion()) { hoja.remove(); return; }
+    hoja.style.transition = 'opacity .32s ease';
+    hoja.style.opacity = '0';
+    setTimeout(() => hoja.remove(), 360);
   }
 
   closeToCover() {
@@ -237,7 +245,7 @@ class Magazine {
       this.coverPage.style.display = '';
       await this.imagenesListas(this.coverPage);
       this.state = 'cover';
-      flipper.remove();
+      this.soltarHoja(flipper);
       this.updateNav();
       this.isAnimating = false;
     }, 800);
@@ -282,7 +290,7 @@ class Magazine {
       this.state = 'backcover';
       this.updateView();
       this.backcoverPage.classList.remove('entrando');
-      flipper.remove();
+      this.soltarHoja(flipper);
       this.isAnimating = false;
     }, 780);
   }
@@ -308,7 +316,7 @@ class Magazine {
       this.currentProject = ultimo;
       this.updateView();
       this.backcoverPage.classList.remove('entrando');
-      flipper.remove();
+      this.soltarHoja(flipper);
       this.isAnimating = false;
     }, 780);
   }
@@ -368,7 +376,7 @@ class Magazine {
       if (baseLeft) {
         baseLeft.innerHTML = this.renderLeftPageInner(projects[toIdx], toIdx + 1);
       }
-      flipper.remove();
+      this.soltarHoja(flipper);
       this.updateNav();
       this.isAnimating = false;
     }, 750);
@@ -429,7 +437,7 @@ class Magazine {
       if (baseRight) {
         baseRight.innerHTML = this.renderRightPageInner(projects[toIdx], toIdx + 1);
       }
-      flipper.remove();
+      this.soltarHoja(flipper);
       this.updateNav();
       this.isAnimating = false;
     }, 750);
