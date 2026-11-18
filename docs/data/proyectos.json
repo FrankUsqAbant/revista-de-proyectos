@@ -106,7 +106,7 @@
     },
     {
       "name": "document-student",
-      "description": "document-student: proyecto de código abierto.",
+      "description": "WOU Academic Document Studio — generador de documentos académicos oficiales de Western Oregon University (React + TypeScript)",
       "githubUrl": "https://github.com/FrankUsqAbant/document-student",
       "liveUrl": "https://frankusqabant.github.io/document-student/",
       "language": "TypeScript",
@@ -239,7 +239,7 @@
     },
     {
       "name": "starter-project-eleventy",
-      "description": "starter-project-eleventy: proyecto de código abierto.",
+      "description": "Eleventy Starter — plantilla base para sitios estáticos con 11ty y Nunjucks",
       "githubUrl": "https://github.com/FrankUsqAbant/starter-project-eleventy",
       "liveUrl": "https://frankusqabant.github.io/starter-project-eleventy/",
       "language": "Nunjucks",
@@ -252,7 +252,7 @@
     },
     {
       "name": "PlatosYa",
-      "description": "PlatosYa: proyecto de código abierto.",
+      "description": "PlatosYa — sistema de pedidos para restaurantes: carta y carrito para clientes y tablero Kanban en tiempo real para la cocina",
       "githubUrl": "https://github.com/FrankUsqAbant/PlatosYa",
       "liveUrl": "https://platos-ya.vercel.app",
       "language": "JavaScript",
