@@ -1,6 +1,21 @@
 {
-  "actualizado": "2026-11-18",
+  "actualizado": "2026-11-20",
   "proyectos": [
+    {
+      "name": "frank-abanto",
+      "description": "Frank Abanto — portafolio de un solo archivo: titular bordado con canvas y WebGL, y proyectos leídos de GitHub",
+      "githubUrl": "https://github.com/FrankUsqAbant/frank-abanto",
+      "liveUrl": "https://frank-abanto.pages.dev",
+      "language": "HTML",
+      "stars": 1,
+      "tags": [
+        "Cloudflare-pages",
+        "Html5",
+        "Webgl"
+      ],
+      "updatedAt": "2026-11-20",
+      "createdAt": "2026-11-15"
+    },
     {
       "name": "PokeAPI",
       "description": "PokeAPI — explorador de los 151 Pokémon de primera generación con datos de la API pública",
@@ -90,19 +105,6 @@
       ],
       "updatedAt": "2026-11-17",
       "createdAt": "2026-11-08"
-    },
-    {
-      "name": "frank-abanto",
-      "description": "Frank Abanto — portafolio de un solo archivo: titular bordado con canvas y WebGL, y proyectos leídos de GitHub",
-      "githubUrl": "https://github.com/FrankUsqAbant/frank-abanto",
-      "liveUrl": "https://frank-abanto.pages.dev",
-      "language": "HTML",
-      "stars": 0,
-      "tags": [
-        "HTML"
-      ],
-      "updatedAt": "2026-11-17",
-      "createdAt": "2026-11-15"
     },
     {
       "name": "document-student",
@@ -265,13 +267,13 @@
     }
   ],
   "imagenes": {
+    "frank-abanto": "https://frankusqabant.github.io/revista-de-proyectos/capturas/frank-abanto.webp",
     "PokeAPI": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
     "FrankUsqAbant.github.io": "https://raw.githubusercontent.com/FrankUsqAbant/FrankUsqAbant.github.io/main/assets/og.jpg",
     "concepto-un-dia": "https://raw.githubusercontent.com/FrankUsqAbant/concepto-un-dia/main/docs/preview.webp",
     "jireh-pasteleria": "https://raw.githubusercontent.com/FrankUsqAbant/jireh-pasteleria/main/docs/preview.webp",
     "chavez-originals": "https://raw.githubusercontent.com/FrankUsqAbant/chavez-originals/main/docs/preview.webp",
     "hostal-aguilar": "https://raw.githubusercontent.com/FrankUsqAbant/hostal-aguilar/main/docs/preview.webp",
-    "frank-abanto": "https://frankusqabant.github.io/revista-de-proyectos/capturas/frank-abanto.webp",
     "document-student": "https://raw.githubusercontent.com/FrankUsqAbant/document-student/main/docs/preview.webp",
     "simple-yoga-elite": "https://raw.githubusercontent.com/FrankUsqAbant/simple-yoga-elite/main/docs/preview.webp",
     "pagina-taller-maquetacion": "https://raw.githubusercontent.com/FrankUsqAbant/pagina-taller-maquetacion/gh-pages/docs/hero.png",
