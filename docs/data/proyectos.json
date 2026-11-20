@@ -2,19 +2,6 @@
   "actualizado": "2026-11-20",
   "proyectos": [
     {
-      "name": "FrankUsqAbant.github.io",
-      "description": "Tarjeta digital en estilo terminal: redes, código QR, contacto (vCard) y compartir. Sin frameworks, 43 KB",
-      "githubUrl": "https://github.com/FrankUsqAbant/FrankUsqAbant.github.io",
-      "liveUrl": "https://frankusqabant.github.io/",
-      "language": "HTML",
-      "stars": 1,
-      "tags": [
-        "HTML"
-      ],
-      "updatedAt": "2026-11-20",
-      "createdAt": "2026-08-04"
-    },
-    {
       "name": "LeerEsPensar",
       "description": "Una biblioteca para la fan page de facebook para que los que esten en el grupo puedan entrar y descargar los libros que quieran o leer..",
       "githubUrl": "https://github.com/FrankUsqAbant/LeerEsPensar",
@@ -26,6 +13,19 @@
       ],
       "updatedAt": "2026-11-20",
       "createdAt": "2026-11-20"
+    },
+    {
+      "name": "FrankUsqAbant.github.io",
+      "description": "Tarjeta digital en estilo terminal: redes, código QR, contacto (vCard) y compartir. Sin frameworks, 43 KB",
+      "githubUrl": "https://github.com/FrankUsqAbant/FrankUsqAbant.github.io",
+      "liveUrl": "https://frankusqabant.github.io/",
+      "language": "HTML",
+      "stars": 1,
+      "tags": [
+        "HTML"
+      ],
+      "updatedAt": "2026-11-20",
+      "createdAt": "2026-08-04"
     },
     {
       "name": "frank-abanto",
