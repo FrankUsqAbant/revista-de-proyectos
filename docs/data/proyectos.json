@@ -2,6 +2,32 @@
   "actualizado": "2026-11-20",
   "proyectos": [
     {
+      "name": "FrankUsqAbant.github.io",
+      "description": "Tarjeta digital en estilo terminal: redes, código QR, contacto (vCard) y compartir. Sin frameworks, 43 KB",
+      "githubUrl": "https://github.com/FrankUsqAbant/FrankUsqAbant.github.io",
+      "liveUrl": "https://frankusqabant.github.io/",
+      "language": "HTML",
+      "stars": 1,
+      "tags": [
+        "HTML"
+      ],
+      "updatedAt": "2026-11-20",
+      "createdAt": "2026-08-04"
+    },
+    {
+      "name": "LeerEsPensar",
+      "description": "Una biblioteca para la fan page de facebook para que los que esten en el grupo puedan entrar y descargar los libros que quieran o leer..",
+      "githubUrl": "https://github.com/FrankUsqAbant/LeerEsPensar",
+      "liveUrl": null,
+      "language": "TypeScript",
+      "stars": 0,
+      "tags": [
+        "TypeScript"
+      ],
+      "updatedAt": "2026-11-20",
+      "createdAt": "2026-11-20"
+    },
+    {
       "name": "frank-abanto",
       "description": "Frank Abanto — portafolio de un solo archivo: titular bordado con canvas y WebGL, y proyectos leídos de GitHub",
       "githubUrl": "https://github.com/FrankUsqAbant/frank-abanto",
@@ -28,19 +54,6 @@
       ],
       "updatedAt": "2026-11-18",
       "createdAt": "2025-03-22"
-    },
-    {
-      "name": "FrankUsqAbant.github.io",
-      "description": "Tarjeta digital en estilo terminal: redes, código QR, contacto (vCard) y compartir. Sin frameworks, 43 KB",
-      "githubUrl": "https://github.com/FrankUsqAbant/FrankUsqAbant.github.io",
-      "liveUrl": "https://frankusqabant.github.io/",
-      "language": "HTML",
-      "stars": 1,
-      "tags": [
-        "HTML"
-      ],
-      "updatedAt": "2026-11-18",
-      "createdAt": "2026-08-04"
     },
     {
       "name": "concepto-un-dia",
@@ -267,9 +280,9 @@
     }
   ],
   "imagenes": {
+    "FrankUsqAbant.github.io": "https://raw.githubusercontent.com/FrankUsqAbant/FrankUsqAbant.github.io/main/assets/og.jpg",
     "frank-abanto": "https://frankusqabant.github.io/revista-de-proyectos/capturas/frank-abanto.webp",
     "PokeAPI": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
-    "FrankUsqAbant.github.io": "https://raw.githubusercontent.com/FrankUsqAbant/FrankUsqAbant.github.io/main/assets/og.jpg",
     "concepto-un-dia": "https://raw.githubusercontent.com/FrankUsqAbant/concepto-un-dia/main/docs/preview.webp",
     "jireh-pasteleria": "https://raw.githubusercontent.com/FrankUsqAbant/jireh-pasteleria/main/docs/preview.webp",
     "chavez-originals": "https://raw.githubusercontent.com/FrankUsqAbant/chavez-originals/main/docs/preview.webp",
