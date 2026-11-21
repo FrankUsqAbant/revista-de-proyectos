@@ -42,4 +42,10 @@ for (const v of vistas) {
   }));
   console.log(v.n, JSON.stringify(datos), errores.length ? 'ERRORES: ' + errores.join(' | ') : 'sin errores');
 }
+// Imagen para redes (og.jpg 1200×630): la portada sobre la mesa, tema oscuro
+const og = await (await browser.newContext({ viewport: { width: 1200, height: 630 }, colorScheme: 'dark' })).newPage();
+await og.goto(base, { waitUntil: 'networkidle' });
+await og.waitForTimeout(1500);
+await og.addStyleTag({ content: '.tema, .pista { display: none !important; }' });
+await og.screenshot({ path: `${out}/og.jpg`, type: 'jpeg', quality: 86 });
 await browser.close();
