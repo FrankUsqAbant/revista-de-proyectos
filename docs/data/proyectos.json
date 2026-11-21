@@ -3,11 +3,11 @@
   "proyectos": [
     {
       "name": "LeerEsPensar",
-      "description": "Una biblioteca para la fan page de facebook para que los que esten en el grupo puedan entrar y descargar los libros que quieran o leer..",
+      "description": "LeerEsPensar — biblioteca para el grupo de Facebook: los miembros pueden leer en línea o descargar los libros que quieran.",
       "githubUrl": "https://github.com/FrankUsqAbant/LeerEsPensar",
       "liveUrl": null,
       "language": "TypeScript",
-      "stars": 0,
+      "stars": 1,
       "tags": [
         "TypeScript"
       ],
@@ -215,7 +215,7 @@
     },
     {
       "name": "vertice-moda",
-      "description": "⚡ VÉRTICE — Moda masculina contemporánea. Sitio web premium dark-theme con acentos cobre. HTML/CSS vanilla, zero dependencias.",
+      "description": "⚡ VÉRTICE — Moda masculina contemporánea. Sitio web premium en tema oscuro con acentos cobre. HTML/CSS vanilla, sin dependencias.",
       "githubUrl": "https://github.com/FrankUsqAbant/vertice-moda",
       "liveUrl": "https://frankusqabant.github.io/vertice-moda/",
       "language": "HTML",
