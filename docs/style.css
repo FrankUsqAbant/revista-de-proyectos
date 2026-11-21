@@ -1813,3 +1813,28 @@ body::after {
 
 /* Foco visible con teclado en las flechas laterales */
 .side-nav__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ═══════ Ajustes UI/UX 2026-11-21 ═══════ */
+/* La pista va arriba al centro: abajo tapaba el borde de la revista */
+.pista { top: 18px; bottom: auto; transform: translate(-50%, -12px); }
+.pista.on { transform: translate(-50%, 0); }
+
+@media (max-width: 640px) {
+  .pista { top: 8px; bottom: auto; }
+  /* Portada en vertical y a pantalla casi completa: antes salía apaisada y cortaba el texto */
+  .magazine-scene.is-cover { width: 92vw; height: min(calc(100dvh - 110px), 680px); margin-top: 24px; }
+  .cover-page .page-inner { padding: 1.6rem 1.3rem 1.3rem 1.5rem; }
+  /* Ficha: la captura cede espacio y el texto cabe sin esconder los botones */
+  .spread__left { height: 32%; }
+  .spread__right { height: 68%; }
+  .spread__left-footer { display: none; }
+  .right-content { padding: 1rem 1.1rem .6rem 1.2rem; }
+  .right-content__name { font-size: 1.7rem; margin-bottom: .4rem; }
+  .right-content__desc { font-size: .95rem; line-height: 1.5; margin-bottom: .8rem; }
+  .right-content__repo-badge { display: none; }
+  .right-content__meta-grid { padding: 8px 10px; gap: 8px; margin-bottom: .9rem; }
+  .meta-box__value { font-size: .76rem; white-space: normal; }
+  .right-content__actions { gap: .5rem; }
+  .right-content__footer { padding: 6px 16px; }
+  .folio-grande { font-size: 6rem; bottom: 60px; }
+}

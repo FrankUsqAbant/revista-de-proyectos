@@ -559,9 +559,11 @@ class Magazine {
       displayTitle = p.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }
 
+    if (displayDesc) displayDesc = displayDesc.replace(/([^.])\.\.$/, '$1.');
+
     const liveBtn = p.liveUrl
       ? `<a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--primary" aria-label="Abrir demo de ${displayTitle}">
-           <span aria-hidden="true">↗</span> Ver Proyecto en Vivo
+           <span aria-hidden="true">↗</span> Ver en vivo
          </a>` : '';
 
     const tagsHTML = p.tags.map(t => `<span class="tag-pill"><span class="tag-dot" aria-hidden="true"></span>${t}</span>`).join('');
@@ -574,7 +576,7 @@ class Magazine {
         <div class="right-content__header">
           <div class="right-content__kicker">
             <span class="kicker-dot" aria-hidden="true"></span>
-            <span class="right-content__eyebrow">CASE STUDY · Nº ${padNum}</span>
+            <span class="right-content__eyebrow">PROYECTO · Nº ${padNum}</span>
           </div>
           <span class="right-content__date">${formatDate(p.updatedAt)}</span>
         </div>
@@ -589,22 +591,23 @@ class Magazine {
         <p class="right-content__desc">${displayDesc}</p>
 
         <div class="right-content__tags-section">
-          <span class="tags-title">STACK TECNOLÓGICO & CAPACIDADES</span>
+          <span class="tags-title">TECNOLOGÍAS</span>
           <div class="right-content__tags">${tagsHTML}</div>
         </div>
 
         <div class="right-content__meta-grid">
           <div class="meta-box">
-            <span class="meta-box__label">REPOSITORIO</span>
-            <span class="meta-box__value">⭐ ${p.stars} ${p.stars === 1 ? 'Star' : 'Stars'}</span>
+            ${p.stars > 0
+              ? `<span class="meta-box__label">ESTRELLAS</span><span class="meta-box__value">★ ${p.stars}</span>`
+              : `<span class="meta-box__label">ACTUALIZADO</span><span class="meta-box__value">${formatDate(p.updatedAt)}</span>`}
           </div>
           <div class="meta-box">
-            <span class="meta-box__label">LENGUAJE CORE</span>
-            <span class="meta-box__value">⚡ ${p.language}</span>
+            <span class="meta-box__label">LENGUAJE</span>
+            <span class="meta-box__value">${p.language}</span>
           </div>
           <div class="meta-box">
-            <span class="meta-box__label">CREACIÓN</span>
-            <span class="meta-box__value">📅 ${formatDate(p.createdAt)}</span>
+            <span class="meta-box__label">CREADO</span>
+            <span class="meta-box__value">${formatDate(p.createdAt)}</span>
           </div>
         </div>
 
