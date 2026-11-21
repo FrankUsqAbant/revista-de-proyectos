@@ -46,6 +46,6 @@ for (const v of vistas) {
 const og = await (await browser.newContext({ viewport: { width: 1200, height: 630 }, colorScheme: 'dark' })).newPage();
 await og.goto(base, { waitUntil: 'networkidle' });
 await og.waitForTimeout(1500);
-await og.addStyleTag({ content: '.tema, .pista { display: none !important; }' });
+await og.addStyleTag({ content: '.tema, .pista { display: none !important; } .revista { transform: translateX(-18.5%); }' });
 await og.screenshot({ path: `${out}/og.jpg`, type: 'jpeg', quality: 86 });
 await browser.close();
