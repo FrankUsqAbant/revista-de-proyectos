@@ -44,33 +44,33 @@ function curvasDeNivel() {
 }
 
 const portada = (total) => `
-  <div class="pagina tapa" data-density="hard">
+  <div class="pagina" data-density="hard"><div class="tapa">
     <div class="tapa__luz" aria-hidden="true"></div>${curvasDeNivel()}
-    <p class="tapa__linea"><span>Frank Abanto</span><span>Nº ${total} · ${new Date().toLocaleDateString('es', { month: 'long', year: 'numeric' })}</span></p>
+    <p class="tapa__linea"><span>Frank Abanto</span><span>Nº ${total} · ${new Date().toLocaleDateString('es', { month: 'short', year: 'numeric' }).replace('.', '')}</span></p>
     <h1 class="tapa__titulo">Proyectos</h1>
     <p class="tapa__pie">Diseño, web y automatización<br>Cajamarca, Perú</p>
-  </div>`;
+  </div></div>`;
 
 const contratapa = () => `
-  <div class="pagina tapa tapa--atras" data-density="hard">
+  <div class="pagina" data-density="hard"><div class="tapa tapa--atras">
     <div class="tapa__luz" aria-hidden="true"></div>${curvasDeNivel()}
     <p class="tapa__pie">Frank Abanto<br><a href="https://github.com/FrankUsqAbant" target="_blank" rel="noopener noreferrer">github.com/FrankUsqAbant</a></p>
-  </div>`;
+  </div></div>`;
 
 // Página izquierda: la captura del proyecto (el src real se pone al acercarse, ver cargarCercanas)
 const paginaImagen = (p, n, img) => `
-  <div class="pagina hoja hoja--imagen" style="--tono:${tono(p.name)}">
+  <div class="pagina"><div class="hoja hoja--imagen" style="--tono:${tono(p.name)}">
     <span class="folio">${dos(n)}</span>
     ${img
       ? `<figure class="captura"><div class="captura__barra" aria-hidden="true"><i></i><i></i><i></i></div><img data-src="${esc(img)}" alt="Captura de ${esc(p.name)}" decoding="async"></figure>`
       : `<div class="captura captura--vacia"><span>${esc(partes(p).titulo)}</span></div>`}
-  </div>`;
+  </div></div>`;
 
 // Página derecha: la ficha
 function paginaFicha(p, n, total) {
   const { titulo, texto } = partes(p);
   return `
-  <div class="pagina hoja hoja--ficha" style="--tono:${tono(p.name)}">
+  <div class="pagina"><div class="hoja hoja--ficha" style="--tono:${tono(p.name)}">
     <p class="ficha__cabeza"><span>Proyecto · Nº ${dos(n)}</span><span>${fecha(p.updatedAt)}</span></p>
     <h2 class="ficha__titulo">${tituloEditorial(titulo)}</h2>
     <p class="ficha__texto">${esc(texto)}</p>
@@ -80,7 +80,7 @@ function paginaFicha(p, n, total) {
       <a href="${esc(p.githubUrl)}" target="_blank" rel="noopener noreferrer">Código en GitHub ↗</a>
     </p>
     <span class="folio">${dos(n)} / ${dos(total)}</span>
-  </div>`;
+  </div></div>`;
 }
 
 const FRASES = [
@@ -93,17 +93,17 @@ const FRASES = [
 ];
 
 const paginaFrases = () => `
-  <div class="pagina hoja hoja--frases">
+  <div class="pagina"><div class="hoja hoja--frases">
     <span class="ficha__cabeza"><span>Marco Aurelio · Meditaciones</span></span>
     <div class="frases">${FRASES.map((f, i) => `<blockquote class="${i ? '' : 'on'}"><p>${esc(f)}</p></blockquote>`).join('')}</div>
     <span class="folio">Traducción libre</span>
-  </div>`;
+  </div></div>`;
 
 const paginaGracias = () => `
-  <div class="pagina hoja hoja--gracias">
+  <div class="pagina"><div class="hoja hoja--gracias">
     <h2 class="ficha__titulo">Gracias por <em>leer</em></h2>
     <p class="ficha__texto">Aquí se irán sumando nuevos proyectos, solos: la revista se actualiza cada 30 minutos. Todo el código está abierto en GitHub.</p>
-  </div>`;
+  </div></div>`;
 
 let libro, proyectos = [];
 

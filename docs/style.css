@@ -155,3 +155,17 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .frases blockquote, .pista { transition: none; }
 }
+
+/* La librería maneja el display de .pagina: el diseño va en el bloque interior.
+   Las medidas usan el ancho de la página (cqw) para crecer con ella. */
+.pagina { container-type: size; }
+.hoja, .tapa { height: 100%; }
+.ficha__cabeza, .tapa__linea { font-size: max(.6rem, 2.1cqw); }
+.ficha__titulo { font-size: max(1.6rem, 9.5cqw); }
+.ficha__texto { font-size: max(.82rem, 3.5cqw); }
+.ficha__tags span { font-size: max(.64rem, 2.4cqw); }
+.ficha__enlaces a { font-size: max(.82rem, 3.2cqw); }
+.folio { font-size: max(.6rem, 2.1cqw); }
+.frases p { font-size: max(1.2rem, 6.4cqw); }
+.tapa__titulo { font-size: max(3rem, 23cqw); }
+.tapa__pie { font-size: max(.72rem, 2.8cqw); }
