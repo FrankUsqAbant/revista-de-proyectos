@@ -25,14 +25,14 @@
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Portada de la revista «Mis proyectos» con capturas de Hostal Aguilar, Chavez Originals, Jiréh Pastelería y Concepto Un día">
+  <meta property="og:image:alt" content="Portada de la revista «Proyectos» de Frank Abanto">
 
   <!-- X (Twitter) -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mis proyectos · Revista interactiva de Frank Abanto">
   <meta name="twitter:description" content="Diseño, web y automatización en formato revista: pasa las páginas y mira cada proyecto.">
   <meta name="twitter:image" content="https://frankusqabant.github.io/revista-de-proyectos/og.jpg">
-  <meta name="twitter:image:alt" content="Portada de la revista «Mis proyectos» con capturas de proyectos reales">
+  <meta name="twitter:image:alt" content="Portada de la revista «Proyectos» de Frank Abanto">
 
   <!-- Iconos y aplicación instalable -->
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -51,7 +51,7 @@
   <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=20261121">
+  <link rel="stylesheet" href="style.css?v=20261121b">
 </head>
 <body>
 
@@ -92,85 +92,16 @@
     <div class="loader__spinner"></div>
   </div>
 
-  <!-- Único control fijo: tema claro/oscuro -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
-    <span class="icon-moon" aria-hidden="true">🌙</span>
-    <span class="icon-sun" aria-hidden="true">☀️</span>
-  </button>
+  <button class="tema" id="tema" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema"><span aria-hidden="true"></span></button>
 
-  <!-- Side Navigation -->
-  <nav class="side-nav side-nav--prev" aria-label="Página anterior">
-    <button class="side-nav__btn" id="side-prev" aria-label="Página anterior" title="Página anterior (←)">
-      ‹
-    </button>
-  </nav>
-  <nav class="side-nav side-nav--next" aria-label="Página siguiente">
-    <button class="side-nav__btn" id="side-next" aria-label="Página siguiente" title="Página siguiente (→)">
-      ›
-    </button>
-  </nav>
-
-  <!-- Magazine 3D Stage -->
-  <main class="magazine-scene is-cover" id="magazine-scene" role="main" aria-label="Revista de proyectos de Frank Abanto">
-    <div class="magazine" id="magazine">
-      
-      <!-- Portada de la revista (con dos caras: tapa y contratapa interna) -->
-      <article class="cover-page mag-page" id="cover-page" aria-label="Portada de la revista de proyectos">
-        <div class="cover-face cover-front" id="cover-front">
-          <!-- La rellena script.js con los datos de proyectos.json -->
-        </div>
-
-        <div class="cover-face cover-back" id="cover-back">
-          <!-- Cara interna que se revela al girar la tapa -->
-        </div>
-      </article>
-
-      <!-- Spread abierto (Página izquierda: Imagen / Página derecha: Detalles) -->
-      <div class="spread-base" id="spread-container">
-        <!-- Renderizado dinámico por script.js -->
-      </div>
-
-      <!-- Contraportada -->
-      <article class="backcover-page mag-page" id="backcover-page" aria-label="Contraportada de la revista">
-        <section class="backcover-quotes" aria-label="Frases de Marco Aurelio">
-          <span class="bq-kicker">Marco Aurelio · Meditaciones</span>
-          <div class="bq-stage" id="bq-stage">
-            <blockquote class="bq on"><p>Ya no discutas qué es un buen hombre: sé uno.</p></blockquote>
-            <blockquote class="bq"><p>Lo que se interpone en el camino se convierte en el camino.</p></blockquote>
-            <blockquote class="bq"><p>Si algo te aflige, no es la cosa, sino tu juicio sobre ella; y está en tu mano cambiarlo ahora.</p></blockquote>
-            <blockquote class="bq"><p>Lo que no beneficia a la colmena, tampoco beneficia a la abeja.</p></blockquote>
-            <blockquote class="bq"><p>La mejor venganza es no parecerte a quien te hizo daño.</p></blockquote>
-            <blockquote class="bq"><p>Haz cada cosa como si fuera la última de tu vida.</p></blockquote>
-          </div>
-          <span class="bq-nota">Traducción libre</span>
-        </section>
-        <div class="backcover-inner">
-          <div class="cover__logo-wrap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.6 4 5v12c3-.4 6 0 8 1.5 2-1.5 5-1.9 8-1.5V5c-3-.4-6 0-8 1.5Z"/><path d="M12 6.5v12"/></svg></div>
-          <h2 class="backcover__text">Gracias por <em>leer</em></h2>
-          <p class="backcover__vivo"><span class="vivo-punto" aria-hidden="true"></span>Aquí se irán sumando nuevos proyectos, solos: la revista se actualiza cada 30 minutos.</p>
-          <p class="backcover__sub">
-            Soy Frank Abanto. Todo el código de estos proyectos está abierto en GitHub: míralo, úsalo o escríbeme por ahí.
-          </p>
-          <a href="https://github.com/FrankUsqAbant" target="_blank" rel="noopener noreferrer" class="cover__cta backcover__gh">
-            Ver mi perfil en GitHub <span aria-hidden="true">↗</span>
-          </a>
-          <button class="cover__cta" id="btn-inicio" aria-label="Volver al inicio">
-            <span aria-hidden="true">←</span> Volver a la portada
-          </button>
-        </div>
-      </article>
-
-    </div>
+  <main class="mesa" aria-label="Revista de proyectos de Frank Abanto">
+    <div class="revista" id="revista"></div>
   </main>
 
-  <!-- Puntos de posición e indicación de uso -->
-  <div class="puntos" id="puntos" aria-hidden="true"></div>
-  <p class="pista" id="pista" aria-hidden="true"></p>
+  <p class="pista" id="pista" aria-hidden="true">Toca o arrastra la esquina para pasar de página</p>
+  <p class="sr-only" id="lector" aria-live="polite">Portada</p>
 
-  <!-- Página actual (solo para lectores de pantalla) -->
-  <p class="sr-only" id="nav-counter" aria-live="polite">Portada</p>
-
-  <!-- Scripts -->
-  <script src="script.js?v=20261121"></script>
+  <script src="vendor/page-flip.browser.js"></script>
+  <script src="script.js?v=20261121b"></script>
 </body>
 </html>

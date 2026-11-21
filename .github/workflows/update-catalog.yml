@@ -28,15 +28,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/sync-repos.mjs
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Miniaturas ligeras para la portada
-        run: |
-          pip install --quiet pillow
-          python scripts/miniaturas.py
-
       - name: Guardar si hay novedades (y latido mensual)
         run: |
           git config user.name "github-actions[bot]"
