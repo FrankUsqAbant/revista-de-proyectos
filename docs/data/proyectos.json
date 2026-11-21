@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-20",
+  "actualizado": "2026-11-21",
   "proyectos": [
     {
       "name": "LeerEsPensar",
@@ -11,7 +11,7 @@
       "tags": [
         "TypeScript"
       ],
-      "updatedAt": "2026-11-20",
+      "updatedAt": "2026-11-21",
       "createdAt": "2026-11-20"
     },
     {
@@ -280,6 +280,7 @@
     }
   ],
   "imagenes": {
+    "LeerEsPensar": "https://raw.githubusercontent.com/FrankUsqAbant/LeerEsPensar/main/docs/hero.webp",
     "FrankUsqAbant.github.io": "https://raw.githubusercontent.com/FrankUsqAbant/FrankUsqAbant.github.io/main/assets/og.jpg",
     "frank-abanto": "https://frankusqabant.github.io/revista-de-proyectos/capturas/frank-abanto.webp",
     "PokeAPI": "https://raw.githubusercontent.com/FrankUsqAbant/PokeAPI/main/img/preview.webp",
