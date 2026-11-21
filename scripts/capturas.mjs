@@ -16,30 +16,30 @@ const browser = await chromium.launch();
 for (const v of vistas) {
   const page = await (await browser.newContext(v.ctx)).newPage();
   const errores = [];
-  page.on('pageerror', e => errores.push(e.message));
+  page.on('pageerror', (e) => errores.push(e.message));
+  page.on('console', (m) => { if (m.type() === 'error') errores.push(m.text()); });
   await page.goto(base, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(3500);
-  await page.screenshot({ path: `${out}/${v.n}-portada.png` });
-  await page.goto(base + '#LeerEsPensar', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(3000);
-  await page.screenshot({ path: `${out}/${v.n}-ficha.png` });
-  // ¿Caben los botones sin desplazar la ficha?
-  const medida = await page.evaluate(() => {
-    const rc = document.querySelector('.spread.active .right-content');
-    const b = document.querySelector('.spread.active .right-content__actions');
-    if (!rc || !b) return 'sin ficha';
-    const r = rc.getBoundingClientRect(), a = b.getBoundingClientRect();
-    return { botonesVisibles: a.bottom <= r.bottom + 1, sobra: Math.round(rc.scrollHeight - rc.clientHeight) };
-  });
-  // Pasar página: ¿la hoja voladora lleva su captura ya cargada?
-  await page.keyboard.press('ArrowRight');
-  const vacias = [];
-  for (const t of [120, 300, 500, 700]) {
-    await page.waitForTimeout(t === 120 ? 120 : t - [120, 300, 500, 700][[120, 300, 500, 700].indexOf(t) - 1]);
-    vacias.push(await page.evaluate(() => [...document.querySelectorAll('.mag-leaf-flipper img.spread__image')].filter(i => !i.complete || !i.naturalWidth).length));
-    if (t === 500) await page.screenshot({ path: `${out}/${v.n}-giro.png` });
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: `${out}/${v.n}-1-portada.png` });
+
+  // Pasar dos veces: foto a mitad del giro y al terminar
+  for (const paso of [2, 3]) {
+    await page.keyboard.press('ArrowRight');
+    await page.waitForTimeout(450);
+    await page.screenshot({ path: `${out}/${v.n}-${paso}-giro.png` });
+    await page.waitForTimeout(900);
+    await page.screenshot({ path: `${out}/${v.n}-${paso}-final.png` });
   }
-  console.log(v.n, 'imagenes vacias durante el giro:', JSON.stringify(vacias));
-  console.log(v.n, JSON.stringify(medida), errores.length ? 'ERRORES: ' + errores.join(' | ') : 'sin errores');
+
+  // Enlace directo: ¿abre el proyecto y sus capturas cercanas están cargadas?
+  await page.goto(base + '#LeerEsPensar', { waitUntil: 'networkidle' });
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: `${out}/${v.n}-4-enlace.png` });
+  const datos = await page.evaluate(() => ({
+    hash: location.hash,
+    libro: document.querySelector('.stf__parent') ? 'ok' : 'sin libro',
+    imgsCargadas: [...document.querySelectorAll('.pagina img')].filter((i) => i.complete && i.naturalWidth).length,
+  }));
+  console.log(v.n, JSON.stringify(datos), errores.length ? 'ERRORES: ' + errores.join(' | ') : 'sin errores');
 }
 await browser.close();
