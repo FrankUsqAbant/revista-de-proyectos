@@ -62,7 +62,7 @@ const paginaImagen = (p, n, img) => `
   <div class="pagina"><div class="hoja hoja--imagen" style="--tono:${tono(p.name)}">
     <span class="folio">${dos(n)}</span>
     ${img
-      ? `<figure class="captura"><div class="captura__barra" aria-hidden="true"><i></i><i></i><i></i></div><img data-src="${esc(img)}" alt="Captura de ${esc(p.name)}" decoding="async"></figure>`
+      ? `<figure class="captura"><div class="captura__barra" aria-hidden="true"><i></i><i></i><i></i></div><img data-src="${esc(img)}" alt="Captura de ${esc(p.name)}" decoding="sync"></figure>`
       : `<div class="captura captura--vacia"><span>${esc(partes(p).titulo)}</span></div>`}
   </div></div>`;
 
@@ -111,7 +111,11 @@ let libro, proyectos = [];
 function cargarCercanas(i) {
   document.querySelectorAll('.pagina img[data-src]').forEach((img) => {
     const pos = Number(img.closest('.pagina').dataset.i);
-    if (Math.abs(pos - i) <= 6) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+    if (Math.abs(pos - i) <= 6) {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+      img.decode?.().catch(() => {}); // decodificada de antemano: aparece completa desde el primer cuadro del giro
+    }
   });
 }
 
