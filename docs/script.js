@@ -44,7 +44,7 @@ function curvasDeNivel() {
 }
 
 const portada = (total) => `
-  <div class="pagina" data-density="hard"><div class="tapa">
+  <div class="pagina"><div class="tapa">
     <div class="tapa__luz" aria-hidden="true"></div>${curvasDeNivel()}
     <p class="tapa__linea"><span>Frank Abanto</span><span>Nº ${total} · ${new Date().toLocaleDateString('es', { month: 'short', year: 'numeric' }).replace('.', '')}</span></p>
     <h1 class="tapa__titulo">Proyectos</h1>
@@ -52,7 +52,7 @@ const portada = (total) => `
   </div></div>`;
 
 const contratapa = () => `
-  <div class="pagina" data-density="hard"><div class="tapa tapa--atras">
+  <div class="pagina"><div class="tapa tapa--atras">
     <div class="tapa__luz" aria-hidden="true"></div>${curvasDeNivel()}
     <p class="tapa__pie">Frank Abanto<br><a href="https://github.com/FrankUsqAbant" target="_blank" rel="noopener noreferrer">github.com/FrankUsqAbant</a></p>
   </div></div>`;
@@ -152,6 +152,10 @@ async function iniciar() {
     startPage: inicio, autoSize: true,
   });
   libro.loadFromHTML(paginas);
+  // Tapas flexibles: la librería las vuelve rígidas y ese giro de cartón 3D era el salto al abrir
+  const tapasBlandas = () => { const ps = libro.getPageCollection().pages; ps[0].setDensity('soft'); ps.at(-1).setDensity('soft'); };
+  tapasBlandas();
+  libro.on('changeOrientation', tapasBlandas);
   libro.on('flip', (e) => alCambiar(e.data));
   alCambiar(inicio);
 

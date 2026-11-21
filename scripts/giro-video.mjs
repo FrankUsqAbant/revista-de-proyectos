@@ -8,8 +8,8 @@ const out = 'capturas-ux/video';
 mkdirSync(out, { recursive: true });
 const variantes = {
   actual: '',
-  'tapa-blanda': "libro.getPageCollection().pages[0].setDensity('soft'); libro.getPageCollection().pages[1].setDensity('soft');",
-  'tapa-ligera': "const s=document.createElement('style'); s.textContent='.tapa::after{display:none}'; document.head.append(s);",
+
+
 };
 const pantallas = { escritorio: { viewport: { width: 1366, height: 768 } }, movil: { ...devices['iPhone 13'] } };
 
