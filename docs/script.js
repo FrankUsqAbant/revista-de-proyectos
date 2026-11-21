@@ -540,10 +540,11 @@ class Magazine {
       displayTitle = parts[0].trim();
       displayDesc = parts.slice(1).join('—').trim();
     } else if (p.name) {
-      displayTitle = p.name.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      displayTitle = p.name.replace(/[-_]/g, ' ').replace(/(^|\s)\w/g, l => l.toUpperCase());
     }
 
     if (displayDesc) displayDesc = displayDesc.replace(/([^.])\.\.$/, '$1.');
+    if (displayDesc) displayDesc = displayDesc.charAt(0).toUpperCase() + displayDesc.slice(1);
 
     const liveBtn = p.liveUrl
       ? `<a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--primary" aria-label="Abrir demo de ${displayTitle}">
