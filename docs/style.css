@@ -1889,3 +1889,8 @@ body::after {
 .cv2-cabecera { font-size: clamp(3.8rem, 7.4vw, 6.4rem); margin-bottom: .4rem; }
 .cv2-cierre { margin-top: 0; }
 @media (pointer: fine) { .pista { display: none; } }
+/* El aire se reparte: cabecera arriba, captura al centro, cierre abajo */
+.cover-page .page-inner.cv2 .cv2-ventana,
+.cover-page .page-inner.cv2 .cv2-cierre,
+.mag-leaf-flipper .page-inner.cv2 .cv2-ventana,
+.mag-leaf-flipper .page-inner.cv2 .cv2-cierre { margin-top: auto; }
