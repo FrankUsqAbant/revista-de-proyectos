@@ -1838,3 +1838,11 @@ body::after {
   .right-content__footer { padding: 6px 16px; }
   .folio-grande { font-size: 6rem; bottom: 60px; }
 }
+/* Sin estrellas la tabla queda en 2 columnas; firma legible en ambos temas */
+.right-content__meta-grid { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
+.mag-signature { color: var(--text-secondary); }
+@media (max-width: 640px) {
+  .cv-plate:nth-child(n+3) { display: block; }
+  .tags-title { display: none; }
+  .right-content__tags-section { margin-bottom: .8rem; }
+}

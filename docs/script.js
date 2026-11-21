@@ -596,11 +596,10 @@ class Magazine {
         </div>
 
         <div class="right-content__meta-grid">
-          <div class="meta-box">
-            ${p.stars > 0
-              ? `<span class="meta-box__label">ESTRELLAS</span><span class="meta-box__value">★ ${p.stars}</span>`
-              : `<span class="meta-box__label">ACTUALIZADO</span><span class="meta-box__value">${formatDate(p.updatedAt)}</span>`}
-          </div>
+          ${p.stars > 0 ? `<div class="meta-box">
+            <span class="meta-box__label">ESTRELLAS</span>
+            <span class="meta-box__value">★ ${p.stars}</span>
+          </div>` : ''}
           <div class="meta-box">
             <span class="meta-box__label">LENGUAJE</span>
             <span class="meta-box__value">${p.language}</span>
