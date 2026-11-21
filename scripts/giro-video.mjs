@@ -29,6 +29,10 @@ for (const [pn, ctxOpts] of Object.entries(pantallas)) {
     await page.waitForTimeout(300);
     await page.keyboard.press('ArrowRight');
     await page.waitForTimeout(1500);
+    // Volver a la portada: dos páginas atrás y foto final de la portada cerrada
+    for (let k = 0; k < 2; k++) { await page.keyboard.press('ArrowLeft'); await page.waitForTimeout(1300); }
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: `${out}/${pn}-vuelta.png` });
     const v = page.video();
     await ctx.close();
     renameSync(await v.path(), `${out}/${pn}-${vn}.webm`);

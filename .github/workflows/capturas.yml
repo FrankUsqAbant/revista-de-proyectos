@@ -17,7 +17,7 @@ jobs:
           sleep 2
           node scripts/capturas.mjs
           node scripts/giro-video.mjs
-          for f in capturas-ux/video/*.webm; do ffmpeg -loglevel error -i "$f" -vf "fps=12,scale=300:-1,tile=8x7" -frames:v 1 "${f%.webm}.png"; done
+          for f in capturas-ux/video/*.webm; do ffmpeg -loglevel error -i "$f" -vf "fps=12,scale=300:-1,tile=8x12" -frames:v 1 "${f%.webm}.png"; done
       - uses: actions/upload-artifact@v4
         with:
           name: capturas
