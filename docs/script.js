@@ -86,27 +86,24 @@ class Magazine {
   }
 
   getCoverFrontHTML(esHoja = false) {
-    // Láminas: los primeros proyectos con captura (sin la propia revista)
-    const laminas = projects
-      .filter((p) => readmeImages[p.name] && p.liveUrl && p.name !== 'revista-de-proyectos' && !p.name.endsWith('.github.io'))
-      .slice(0, 4)
-      .map((p) => `<div class="cv-plate"><img src="${(miniaturas[p.name] && miniaturas[p.name].url) || readmeImages[p.name]}" alt=""><span>${esc(tituloDe(p))}</span></div>`)
+    const destacados = projects
+      .filter((p) => getImageForProject(p.name) && p.liveUrl && p.name !== 'revista-de-proyectos' && !p.name.endsWith('.github.io'))
+      .slice(0, 4);
+    const fotos = destacados
+      .map((p, i) => `<img src="${getImageForProject(p.name)}" alt="" class="${i === 0 ? 'on' : ''}" data-titulo="${esc(tituloDe(p))}">`)
       .join('');
-    // Lenguajes más usados
-    const conteo = {};
-    projects.forEach((p) => { if (p.language && p.language !== 'Code') conteo[p.language] = (conteo[p.language] || 0) + 1; });
-    const lenguajes = Object.entries(conteo).sort((a, b) => b[1] - a[1]).slice(0, 3).map((e) => e[0]);
-    const anio = new Date().getFullYear();
+    const fecha = new Date().toLocaleDateString('es', { month: 'long', year: 'numeric' });
     return `
-      <div class="page-inner">
-        <div class="cv-meta"><span>Edición ${anio}</span><span>${projects.length} proyectos</span></div>
-        <div class="cv-rule"></div>
-        <h1 class="cover__title">Mis <em>proyectos</em></h1>
-        <p class="cover__subtitle">Soy <strong>Frank Abanto</strong>. Diseño y programo webs y automatizaciones para negocios reales. Aquí está lo que he construido, uno por página.</p>
-        <div class="cv-plates">${laminas}</div>
-        <div class="cv-pie">
-          <div class="cv-chips">${lenguajes.map((l) => `<span>${l}</span>`).join('')}</div>
-          <button class="cover__cta" ${esHoja ? 'aria-hidden="true" tabindex="-1"' : 'id="cta-open"'}>Abrir la revista <span aria-hidden="true">→</span></button>
+      <div class="page-inner cv2">
+        <p class="cv2-linea"><span>Frank Abanto</span><span>Nº ${projects.length} · ${fecha}</span></p>
+        <h1 class="cv2-cabecera">Proyectos</h1>
+        <figure class="cv2-ventana">
+          <div class="cv2-fotos">${fotos}</div>
+          <figcaption class="cv2-pie"><span>En portada</span> <b class="cv2-titulo">${destacados[0] ? esc(tituloDe(destacados[0])) : ''}</b></figcaption>
+        </figure>
+        <div class="cv2-cierre">
+          <p class="cv2-frase">Webs y automatizaciones para negocios reales, una por página.</p>
+          <button class="cover__cta" ${esHoja ? 'aria-hidden="true" tabindex="-1"' : 'id="cta-open"'}>Abrir <span aria-hidden="true">→</span></button>
         </div>
       </div>
     `;
@@ -364,13 +361,7 @@ class Magazine {
     this.magazine.appendChild(flipper);
 
     // Activar giro 3D de 0deg a -180deg
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        flipper.classList.add('is-flipping');
-      });
-    });
-
-    setTimeout(async () => {
+    this.girar(flipper, async () => {
       this.currentProject = toIdx;
       const baseLeft = this.spreadContainer.querySelector('.spread__left');
       if (baseLeft) {
@@ -380,7 +371,7 @@ class Magazine {
       this.soltarHoja(flipper);
       this.updateNav();
       this.isAnimating = false;
-    }, 750);
+    });
   }
 
   // ── Efecto de pasar hoja hacia atrás (Izquierda a Derecha) ──
@@ -426,13 +417,7 @@ class Magazine {
     this.magazine.appendChild(flipper);
 
     // Activar giro 3D de 0deg a 180deg
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        flipper.classList.add('is-flipping');
-      });
-    });
-
-    setTimeout(async () => {
+    this.girar(flipper, async () => {
       this.currentProject = toIdx;
       const baseRight = this.spreadContainer.querySelector('.spread__right');
       if (baseRight) {
@@ -442,7 +427,7 @@ class Magazine {
       this.soltarHoja(flipper);
       this.updateNav();
       this.isAnimating = false;
-    }, 750);
+    });
   }
 
   goToProject(idx) {
@@ -524,7 +509,7 @@ class Magazine {
       ? `<div class="spread__image-wrap">
            <img src="${imgUrl}" alt="" class="spread__image-bg" aria-hidden="true">
            <div class="spread__image-frame">
-             <div class="shot"><div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="${imgUrl}" alt="Captura del proyecto ${p.name}" class="spread__image" loading="lazy" data-fallo-lang="${langClass}" data-fallo-icon="${icon}" data-fallo-name="${p.name}"></div>
+             <div class="shot"><div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i></div><img src="${imgUrl}" alt="Captura del proyecto ${p.name}" class="spread__image" decoding="async" data-fallo-lang="${langClass}" data-fallo-icon="${icon}" data-fallo-name="${p.name}"></div>
            </div>
            <div class="spread__image-overlay"></div>
          </div>`
@@ -538,7 +523,6 @@ class Magazine {
     return `
       <div class="spread__left-header">
         <span class="spread__page-num">PÁG. ${pageNum < 10 ? '0' + pageNum : pageNum}</span>
-        <span class="spread__lang-pill">${p.language}</span>
       </div>
       ${leftContent}
       <div class="spread__left-footer">
@@ -572,7 +556,6 @@ class Magazine {
 
     return `
       <div class="right-content">
-        <span class="folio-grande" aria-hidden="true">${padNum}</span>
         <div class="right-content__header">
           <div class="right-content__kicker">
             <span class="kicker-dot" aria-hidden="true"></span>
@@ -583,31 +566,11 @@ class Magazine {
 
         <h2 class="right-content__name">${tituloEditorial(displayTitle)}</h2>
 
-        <div class="right-content__repo-badge">
-          <svg class="repo-icon" width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"/></svg>
-          <code>${p.name}</code>
-        </div>
-
         <p class="right-content__desc">${displayDesc}</p>
 
         <div class="right-content__tags-section">
           <span class="tags-title">TECNOLOGÍAS</span>
           <div class="right-content__tags">${tagsHTML}</div>
-        </div>
-
-        <div class="right-content__meta-grid">
-          ${p.stars > 0 ? `<div class="meta-box">
-            <span class="meta-box__label">ESTRELLAS</span>
-            <span class="meta-box__value">★ ${p.stars}</span>
-          </div>` : ''}
-          <div class="meta-box">
-            <span class="meta-box__label">LENGUAJE</span>
-            <span class="meta-box__value">${p.language}</span>
-          </div>
-          <div class="meta-box">
-            <span class="meta-box__label">CREADO</span>
-            <span class="meta-box__value">${formatDate(p.createdAt)}</span>
-          </div>
         </div>
 
         <div class="right-content__actions">
@@ -670,7 +633,30 @@ class Magazine {
     }, 7000);
   }
 
+  // La hoja empieza a girar cuando sus imágenes ya están listas (máx. 600 ms): sin marcos vacíos
+  girar(hoja, fin) {
+    this.imagenesListas(hoja).then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+      hoja.classList.add('is-flipping');
+      setTimeout(fin, 750);
+    })));
+  }
+
+  // Deja decodificadas las capturas de los proyectos vecinos
+  precargar() {
+    this._precargadas = this._precargadas || new Set();
+    [-2, -1, 1, 2].forEach((d) => {
+      const p = projects[this.currentProject + d];
+      const url = p && getImageForProject(p.name);
+      if (!url || this._precargadas.has(url)) return;
+      this._precargadas.add(url);
+      const img = new Image();
+      img.src = url;
+      if (img.decode) img.decode().catch(() => {});
+    });
+  }
+
   updateNav() {
+    this.precargar();
     this.rotarFrases();
     this.pintarTono();
     const total = projects.length + 2;
@@ -836,6 +822,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   document.getElementById('cover-front').innerHTML = Magazine.prototype.getCoverFrontHTML.call({}, false);
+  rotarPortada();
   // Las imágenes de la portada se guardan en memoria para que nunca tarden al volver
   window.__portadaImgs = [...document.querySelectorAll('#cover-front .cv-plate img')].map((i) => { const n = new Image(); n.src = i.src; return n; });
   const hashInicial = location.hash; // se lee antes de crear la revista, que reescribe la dirección
@@ -861,3 +848,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   document.getElementById('btn-inicio')?.addEventListener('click', () => magazine.goToProject(0));
 });
+
+// Las capturas de la portada se funden despacio, una cada 5 s; sin movimiento si el sistema lo pide
+function rotarPortada() {
+  const tapa = document.getElementById('cover-front');
+  const fotos = [...tapa.querySelectorAll('.cv2-fotos img')];
+  const titulo = tapa.querySelector('.cv2-titulo');
+  if (fotos.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let i = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    fotos[i].classList.remove('on');
+    i = (i + 1) % fotos.length;
+    fotos[i].classList.add('on');
+    titulo.classList.add('cambia');
+    setTimeout(() => { titulo.textContent = fotos[i].dataset.titulo; titulo.classList.remove('cambia'); }, 450);
+  }, 5000);
+}

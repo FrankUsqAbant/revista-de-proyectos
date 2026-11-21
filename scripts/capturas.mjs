@@ -31,6 +31,15 @@ for (const v of vistas) {
     const r = rc.getBoundingClientRect(), a = b.getBoundingClientRect();
     return { botonesVisibles: a.bottom <= r.bottom + 1, sobra: Math.round(rc.scrollHeight - rc.clientHeight) };
   });
+  // Pasar página: ¿la hoja voladora lleva su captura ya cargada?
+  await page.keyboard.press('ArrowRight');
+  const vacias = [];
+  for (const t of [120, 300, 500, 700]) {
+    await page.waitForTimeout(t === 120 ? 120 : t - [120, 300, 500, 700][[120, 300, 500, 700].indexOf(t) - 1]);
+    vacias.push(await page.evaluate(() => [...document.querySelectorAll('.mag-leaf-flipper img.spread__image')].filter(i => !i.complete || !i.naturalWidth).length));
+    if (t === 500) await page.screenshot({ path: `${out}/${v.n}-giro.png` });
+  }
+  console.log(v.n, 'imagenes vacias durante el giro:', JSON.stringify(vacias));
   console.log(v.n, JSON.stringify(medida), errores.length ? 'ERRORES: ' + errores.join(' | ') : 'sin errores');
 }
 await browser.close();

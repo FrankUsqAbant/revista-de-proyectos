@@ -1846,3 +1846,39 @@ body::after {
   .tags-title { display: none; }
   .right-content__tags-section { margin-bottom: .8rem; }
 }
+
+/* ═══════ Portada 2026-11-21: cabecera, ventana con capturas y una línea ═══════ */
+.cv2 { gap: 0; }
+.cv2-linea {
+  position: relative; z-index: 1; display: flex; justify-content: space-between; margin: .4rem 0 0;
+  font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-muted);
+}
+.cv2-cabecera {
+  position: relative; z-index: 1; margin: .2rem 0 1rem; font-family: var(--font-display); font-style: italic;
+  font-weight: 400; font-size: clamp(3.4rem, 6.4vw, 5.6rem); line-height: .95; letter-spacing: -.03em; color: var(--text-primary);
+}
+.cv2-ventana { position: relative; z-index: 1; flex: 1; min-height: 0; margin: 0; display: flex; flex-direction: column; }
+.cv2-fotos {
+  position: relative; flex: 1; min-height: 0; border-radius: 10px; overflow: hidden;
+  background: var(--mag-paper-left); box-shadow: 0 18px 30px -18px rgba(0,0,0,.55), inset 0 0 0 1px var(--border-subtle);
+}
+.cv2-fotos img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  opacity: 0; transform: scale(1.04); transition: opacity 1.4s ease, transform 6s ease-out;
+}
+.cv2-fotos img.on { opacity: 1; transform: scale(1); }
+.cv2-pie { margin-top: .6rem; font-size: .72rem; color: var(--text-muted); letter-spacing: .02em; }
+.cv2-pie span { letter-spacing: .18em; text-transform: uppercase; font-size: .6rem; margin-right: .35rem; }
+.cv2-titulo { font-weight: 600; color: var(--text-primary); transition: opacity .45s ease; }
+.cv2-titulo.cambia { opacity: 0; }
+.cv2-cierre { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+.cv2-frase { margin: 0; max-width: 17rem; font-size: .9rem; line-height: 1.45; color: var(--text-secondary); }
+@media (max-width: 640px) {
+  .cv2-cabecera { font-size: 3.6rem; }
+  .cv2-frase { font-size: .85rem; }
+}
+@media (prefers-reduced-motion: reduce) { .cv2-fotos img, .cv2-titulo { transition: none; } }
+
+/* Ficha sin repeticiones */
+.spread__lang-pill, .folio-grande, .right-content__repo-badge, .right-content__meta-grid { display: none; }
+.right-content__actions { margin-top: auto; }
