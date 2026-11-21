@@ -169,3 +169,7 @@ body {
 .frases p { font-size: max(1.2rem, 6.4cqw); }
 .tapa__titulo { font-size: max(3rem, 23cqw); }
 .tapa__pie { font-size: max(.72rem, 2.8cqw); }
+
+/* Al cerrar hacia la portada, la página que queda debajo se desvanece con el giro */
+.pagina { transition: opacity .7s ease; }
+.pagina.se-cierra { opacity: 0; }

@@ -160,6 +160,16 @@ async function iniciar() {
   const tapasBlandas = () => { const ps = libro.getPageCollection().pages; ps[0].setDensity('soft'); ps.at(-1).setDensity('soft'); };
   tapasBlandas();
   libro.on('changeOrientation', tapasBlandas);
+  // Al cerrar hacia la portada (doble página), la página 1 se queda quieta a la izquierda mientras la tapa
+  // se cierra: se desvanece al ritmo del giro y vuelve si el giro se cancela.
+  const [tapa, pagina1] = paginas;
+  libro.on('changeState', (e) => {
+    if (e.data === 'read') { pagina1.classList.remove('se-cierra'); return; }
+    requestAnimationFrame(() => {
+      const cerrando = libro.getOrientation() === 'landscape' && libro.getCurrentPageIndex() === 1 && tapa.style.display !== 'none';
+      pagina1.classList.toggle('se-cierra', cerrando);
+    });
+  });
   libro.on('flip', (e) => alCambiar(e.data));
   alCambiar(inicio);
 
