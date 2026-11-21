@@ -1882,3 +1882,10 @@ body::after {
 /* Ficha sin repeticiones */
 .spread__lang-pill, .folio-grande, .right-content__repo-badge, .right-content__meta-grid { display: none; }
 .right-content__actions { margin-top: auto; }
+/* Ajuste portada: captura entera en formato pantalla, aire repartido; pista solo en táctil */
+.cv2 { justify-content: space-between; }
+.cv2-ventana { flex: none; }
+.cv2-fotos { flex: none; aspect-ratio: 16 / 10; }
+.cv2-cabecera { font-size: clamp(3.8rem, 7.4vw, 6.4rem); margin-bottom: .4rem; }
+.cv2-cierre { margin-top: 0; }
+@media (pointer: fine) { .pista { display: none; } }
